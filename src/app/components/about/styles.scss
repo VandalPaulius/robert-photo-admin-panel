@@ -1,0 +1,34 @@
+.about {
+    display: flex;
+    justify-content: center;
+    
+    .content {
+        max-width: 700px;
+        display: flex;
+        flex-wrap: wrap;
+
+        .imageContainer {
+            &>.image {
+                width: 99%;
+                height: auto;
+
+                max-width: 100%;
+                max-height: 100%;
+            }
+        }
+
+        .text {
+            color: #000000;
+            margin: 20px;
+
+            &.heading {
+                font-size: 30px;
+                font-weight: 700;
+
+                &.textAfter {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}

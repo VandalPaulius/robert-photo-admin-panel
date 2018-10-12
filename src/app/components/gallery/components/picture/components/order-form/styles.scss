@@ -1,0 +1,47 @@
+.orderForm {
+    padding: 25px 20px 20px 20px;
+    border: solid 1px #C4C4C4;
+    
+    .sizeButtonContainer {
+        display: flex;
+        flex-wrap: wrap;
+
+        &>.sizeToggleButton {
+            margin: 7px;
+            cursor: pointer;
+            font-size: 13px;
+            padding: 10px 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.356);
+            transition: background 0.1s ease-out;
+            user-select: none;
+    
+            &:hover {
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.356);
+            }
+    
+            &>.price {
+                margin-left: 10px;
+                font-weight: 600;
+            }
+
+            &.selected {
+                background: #252525;
+                color: #FFFFFF;
+            }
+        }
+    }
+
+    &>.contactForm {
+        margin: 20px 5px 0 5px;
+    }
+
+    .error {
+        color: rgb(255, 0, 0);
+        height: 15px;
+        font-size: 14px;
+        margin: 0 5px 10px 5px;
+    }
+}

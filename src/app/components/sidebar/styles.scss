@@ -1,0 +1,82 @@
+.sidebar {
+    background: #252525;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.356);
+    position: relative;
+    height: 100%;
+
+    &>.buttonContainer {
+        display: flex;
+        justify-content: flex-end;
+
+        &>.openCloseButton {
+            margin: 20px 10px 0 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            cursor: pointer;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.356);
+            transition: background 0.1s ease-out;
+    
+            &:hover {
+                background: #FFFFFF;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.356);
+                z-index: 1;
+    
+                &>.chevronIcon {
+                    fill: #000000;
+                    stroke: #000000;
+                }
+            }
+    
+            &>.chevronIcon {
+                fill: #FFFFFF;
+                stroke: #FFFFFF;
+                height: 18px;
+                width: 18px;
+                transform: rotate(0deg);
+                transition: transform 0.2s ease-out;
+                transition: fill 0.1s ease-out;
+                transition: stroke 0.1s ease-out;
+        
+                &.rotated {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+    }
+
+    &>.mainContent {
+        margin: 20px 0;
+        min-width: 210px;
+
+        .item {
+            color: #FFFFFF;
+            font-size: 18px;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.1s ease-out;
+    
+            &:hover {
+                color: #000000;
+                background-color: #FFFFFF;
+                box-shadow: 0 0 6px rgba(0, 0, 0, 0.356);
+                z-index: 1;
+            }
+    
+            &.active {
+                color: #000000;
+                background-color: #FFFFFF;
+                box-shadow: 0 0 6px rgba(0, 0, 0, 0.356);
+                z-index: 1;
+            }
+    
+            a {
+                text-decoration: inherit;
+                color: inherit;
+            }
+        }
+    }
+}
