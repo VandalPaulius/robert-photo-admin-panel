@@ -126,7 +126,7 @@ class App extends React.Component {
                 <div className={styles.app}>
                     {this.state.loaded ? (
                         <React.Fragment>
-                            <div>
+                            <div className={styles.header}>
                                 {this.state.config.websiteName}
                             </div>
                             <div className={styles.mainContent}>
