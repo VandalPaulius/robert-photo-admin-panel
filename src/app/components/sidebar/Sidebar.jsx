@@ -90,7 +90,7 @@ class Sidebar extends React.Component {
                     className={`${
                         styles.openCloseButton
                     } ${
-                        this.state.openCloseEnabled ? '' : 'hide'
+                        this.state.openCloseEnabled ? '' : styles.hide
                     } ${
                         this.state.open ? '' : styles.noRightMargin
                     }`}
@@ -115,6 +115,8 @@ class Sidebar extends React.Component {
     }
 
     render() {
+        console.log('Sidebar this.state: ', this.state)
+
         return (
             <div className={styles.sidebar}>
                 <Expandable
