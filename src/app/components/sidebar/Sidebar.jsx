@@ -28,9 +28,6 @@ class Sidebar extends React.Component {
             updateOpenCloseEnabled: (openCloseEnabled) => {
                 this.setState({ openCloseEnabled });
             },
-            // updateSidebarOpen: (data) => {
-            //     console.log('data: ', data)
-            // },
         };
     }
 
@@ -57,97 +54,70 @@ class Sidebar extends React.Component {
         }
     }
 
+    renderLink(path, name) {
+        return (
+            <Link
+                to={path}
+                tabIndex={0}
+                role="button"
+                onClick={() => {
+                    if (this.state.openCloseEnabled) {
+                        this.actions.toggleMenuOpen(false);
+                    }
+                }}
+                className={
+                    `${
+                        styles.item
+                    } ${
+                        this.props.location.pathname === path ? styles.active : ''
+                    }`
+                }
+            >
+                {name}
+            </Link>
+        );
+    }
+
+    renderBackButton() {
+        return (
+            <div className={styles.buttonContainer}>
+                <div
+                    className={`${
+                        styles.openCloseButton
+                    } ${
+                        this.state.openCloseEnabled ? '' : 'hide'
+                    }`}
+                    tabIndex={0}
+                    role="button"
+                    onClick={() => {
+                        if (this.state.openCloseEnabled) {
+                            this.actions.toggleMenuOpen(!this.state.open);
+                        }
+                    }}
+                >
+                    <ChevronIcon
+                        className={`${
+                            styles.chevronIcon
+                        } ${
+                            this.state.open ? styles.rotated : ''
+                        }`}
+                    />
+                </div>
+            </div>
+        );
+    }
+
     render() {
         console.log('Sidebar this.state: ', this.state)
 
         return (
             <div className={styles.sidebar}>
-                <div className={styles.buttonContainer}>
-                    <div
-                        className={`${
-                            styles.openCloseButton
-                        } ${
-                            this.state.openCloseEnabled ? '' : 'hide'
-                        }`}
-                        tabIndex={0}
-                        role="button"
-                        onClick={() => {
-                            if (this.state.openCloseEnabled) {
-                                this.actions.toggleMenuOpen(!this.state.open);
-                            }
-                        }}
-                    >
-                        <ChevronIcon
-                            className={`${
-                                styles.chevronIcon
-                            } ${
-                                this.state.open ? styles.rotated : ''
-                            }`}
-                        />
-                    </div>
-                </div>
-                
+                {this.renderBackButton()}
                 <div className={styles.mainContent}>
-                    <Link
-                        to="/"
-                        tabIndex={0}
-                        role="button"
-                        onClick={() => this.actions.toggleMenuOpen(false)}
-                        className={
-                            `${
-                                styles.item
-                            } ${
-                                this.props.location.pathname === '/' ? styles.active : ''
-                            }`
-                        }
-                    >
-                        Gallery
-                    </Link>
-                    <Link
-                        to="/about"
-                        tabIndex={0}
-                        role="button"
-                        onClick={() => this.actions.toggleMenuOpen(false)}
-                        className={
-                            `${
-                                styles.item
-                            } ${
-                                this.props.location.pathname === '/about' ? styles.active : ''
-                            }`
-                        }
-                    >
-                        About
-                    </Link>
-                    <Link
-                        to="/contact"
-                        tabIndex={0}
-                        role="button"
-                        onClick={() => this.actions.toggleMenuOpen(false)}
-                        className={
-                            `${
-                                styles.item
-                            } ${
-                                this.props.location.pathname === '/contact' ? styles.active : ''
-                            }`
-                        }
-                    >
-                        Contact
-                    </Link>
-                    <Link
-                        to="/general"
-                        tabIndex={0}
-                        role="button"
-                        onClick={() => this.actions.toggleMenuOpen(false)}
-                        className={
-                            `${
-                                styles.item
-                            } ${
-                                this.props.location.pathname === '/general' ? styles.active : ''
-                            }`
-                        }
-                    >
-                        General Settings
-                    </Link>
+                    {this.renderLink('/', 'Gallery')}
+                    {this.renderLink('/about', 'About')}
+                    {this.renderLink('/contact', 'Contact')}
+                    {this.renderLink('/general', 'General Settings')}
                 </div>
             </div>
         );
