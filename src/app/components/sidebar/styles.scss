@@ -1,83 +1,96 @@
 .sidebar {
     background: #252525;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.356);
-    position: relative;
     height: 100%;
 
-    &>.buttonContainer {
-        display: flex;
-        justify-content: flex-end;
+    .expandable {
+        min-width: 38px;
+    }
 
-        &>.openCloseButton {
-            margin: 20px 10px 0 0;
+    .expandableContent {
+        height: 100%;
+        min-width: 20px;
+
+        &>.buttonContainer {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-            cursor: pointer;
-            box-shadow: 0 0 6px rgba(0, 0, 0, 0.356);
-            transition: background 0.1s ease-out;
-
-            &.hide {
-                visibility: hidden;
-            }
+            justify-content: flex-end;
     
-            &:hover {
-                background: #FFFFFF;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.356);
-                z-index: 1;
+            &>.openCloseButton {
+                margin: 20px 10px 0 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 10px;
+                cursor: pointer;
+                box-shadow: 0 0 6px rgba(0, 0, 0, 0.356);
+                transition: background 0.1s ease-out;
+                transition: margin-right 0.3s ease-out;
     
-                &>.chevronIcon {
-                    fill: #000000;
-                    stroke: #000000;
+                &.hide {
+                    visibility: hidden;
                 }
-            }
-    
-            &>.chevronIcon {
-                fill: #FFFFFF;
-                stroke: #FFFFFF;
-                height: 18px;
-                width: 18px;
-                transform: rotate(0deg);
-                transition: transform 0.2s ease-out;
         
-                &.rotated {
-                    transform: rotate(180deg);
+                &:hover {
+                    background: #FFFFFF;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.356);
+                    z-index: 1;
+        
+                    &>.chevronIcon {
+                        fill: #000000;
+                        stroke: #000000;
+                    }
+                }
+        
+                &>.chevronIcon {
+                    fill: #FFFFFF;
+                    stroke: #FFFFFF;
+                    height: 18px;
+                    width: 18px;
+                    transform: rotate(0deg);
+                    transition: transform 0.2s ease-out;
+            
+                    &.rotated {
+                        transform: rotate(180deg);
+                    }
+                }
+
+                &.noRightMargin {
+                    margin-right: 0;
                 }
             }
         }
-    }
-
-    &>.mainContent {
-        margin: 15px 0;
-        min-width: 210px;
-
-        .item {
-            color: #FFFFFF;
-            font-size: 18px;
-            padding: 12px 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: background 0.1s ease-out;
     
-            &:hover {
-                color: #000000;
-                background-color: #FFFFFF;
-                box-shadow: 0 0 6px rgba(0, 0, 0, 0.356);
-                z-index: 1;
-            }
+        &>.mainContent {
+            margin: 15px 0;
+            min-width: 210px;
     
-            &.active {
-                color: #000000;
-                background-color: #FFFFFF;
-                box-shadow: 0 0 6px rgba(0, 0, 0, 0.356);
-                z-index: 1;
-            }
-    
-            a {
-                text-decoration: inherit;
-                color: inherit;
+            .item {
+                color: #FFFFFF;
+                font-size: 18px;
+                padding: 12px 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: background 0.1s ease-out;
+        
+                &:hover {
+                    color: #000000;
+                    background-color: #FFFFFF;
+                    box-shadow: 0 0 6px rgba(0, 0, 0, 0.356);
+                    z-index: 1;
+                }
+        
+                &.active {
+                    color: #000000;
+                    background-color: #FFFFFF;
+                    box-shadow: 0 0 6px rgba(0, 0, 0, 0.356);
+                    z-index: 1;
+                }
+        
+                a {
+                    text-decoration: inherit;
+                    color: inherit;
+                }
             }
         }
     }

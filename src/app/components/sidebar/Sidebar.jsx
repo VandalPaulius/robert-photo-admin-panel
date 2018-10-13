@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
-import { ChevronIcon } from 'components';
+import { ChevronIcon, Expandable } from 'components';
 import styles from './styles.scss';
 
 class Sidebar extends React.Component {
@@ -49,8 +49,13 @@ class Sidebar extends React.Component {
             if (this.state.open) {
                 this.actions.toggleMenuOpen(false);
             }
-        } else if (this.state.openCloseEnabled) {
-            this.actions.updateOpenCloseEnabled(false);
+        } else {
+            if (this.state.openCloseEnabled) {
+                this.actions.updateOpenCloseEnabled(false);
+            }
+            if (!this.state.open) {
+                this.actions.toggleMenuOpen(true);
+            }
         }
     }
 
@@ -86,6 +91,8 @@ class Sidebar extends React.Component {
                         styles.openCloseButton
                     } ${
                         this.state.openCloseEnabled ? '' : 'hide'
+                    } ${
+                        this.state.open ? '' : styles.noRightMargin
                     }`}
                     tabIndex={0}
                     role="button"
@@ -108,17 +115,23 @@ class Sidebar extends React.Component {
     }
 
     render() {
-        console.log('Sidebar this.state: ', this.state)
-
         return (
             <div className={styles.sidebar}>
-                {this.renderBackButton()}
-                <div className={styles.mainContent}>
-                    {this.renderLink('/', 'Gallery')}
-                    {this.renderLink('/about', 'About')}
-                    {this.renderLink('/contact', 'Contact')}
-                    {this.renderLink('/general', 'General Settings')}
-                </div>
+                <Expandable
+                    horizontal
+                    expanded={this.state.open}
+                    className={styles.expandable}
+                >
+                    <div className={styles.expandableContent}>
+                        {this.renderBackButton()}
+                        <div className={styles.mainContent}>
+                            {this.renderLink('/', 'Gallery')}
+                            {this.renderLink('/about', 'About')}
+                            {this.renderLink('/contact', 'Contact')}
+                            {this.renderLink('/general', 'General Settings')}
+                        </div>
+                    </div>
+                </Expandable>
             </div>
         );
     }

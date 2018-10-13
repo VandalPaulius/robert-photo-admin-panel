@@ -1,5 +1,15 @@
 .expandable {
     overflow: hidden;
     transition: height 0.3s ease-out;
-    height: 0;
+    transition: width 0.3s ease-out;
+
+    &.vertical {
+        height: 0;
+        width: 100%;
+    }
+
+    &.horizontal {
+        height: 100%;
+        width: 0;
+    }
 }
