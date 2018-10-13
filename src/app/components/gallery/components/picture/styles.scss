@@ -1,0 +1,71 @@
+.picture {
+    cursor: pointer;
+
+    &:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.356);
+        z-index: 1;
+
+        &>.imageContainer {
+            &>.buttonOverlay {
+                &>.getPrintedOverlayButton {
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.356);
+                    z-index: 1;
+                    background: rgb(218, 218, 218);
+                }
+            }
+        }
+    }
+    
+    &>.imageContainer {
+        width: 100%;
+        position: relative;
+
+        &>.image {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        &>.buttonOverlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            &>.getPrintedOverlayButton {
+                position: absolute;
+                left: 18px;
+                bottom: 18px;
+                font-size: 13px;
+                padding: 3px 6px;
+                background: rgba(160, 160, 160, 0.747);
+                color: #000000;
+                box-shadow: 0 0 6px rgba(0, 0, 0, 0.356);
+                transition: background 0.1s ease-out;
+                user-select: none;
+
+                &:hover {
+                    background: rgb(255, 255, 255);
+                }
+            }
+
+            &>.chevronIcon {
+                position: absolute;
+                right: 18px;
+                bottom: 18px;
+                fill: #FFFFFF;
+                stroke: #FFFFFF;
+                color: white;
+                height: 18px;
+                width: 18px;
+                transform: rotate(90deg);
+                transition: transform 0.2s ease-out;
+
+                &.rotated {
+                    transform: rotate(270deg);
+                }
+            }
+        }
+    }
+}
