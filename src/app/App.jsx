@@ -28,6 +28,7 @@ class App extends React.Component {
                         loaded: true,
                         config: {
                             websiteName: 'Robert Photo',
+                            websiteUrl: 'robert-photo.co.uk',
                             aboutMe: [{
                                 id: 'asdasd',
                                 image: true,
@@ -127,7 +128,7 @@ class App extends React.Component {
                     {this.state.loaded ? (
                         <React.Fragment>
                             <div className={styles.header}>
-                                {this.state.config.websiteName}
+                                {`${this.state.config.websiteUrl} Admin Panel`}
                             </div>
                             <div className={styles.mainContent}>
                                 <Sidebar />
