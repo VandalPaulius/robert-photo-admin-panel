@@ -10,17 +10,14 @@ function Contact(props) {
                 <InputField
                     className={styles.inputField}
                     label="Caption"
-                    error="Please input email"
                 />
                 <InputField
                     className={styles.inputField}
                     label="Email placeholder"
-                    error="Please input email"
                 />
                 <InputField
                     className={styles.inputField}
                     label="Message placeholder"
-                    error="Please input email"
                 />
             </div>
         </div>
