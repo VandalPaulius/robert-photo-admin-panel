@@ -1,0 +1,32 @@
+.iputField {
+    display: flex;
+    flex-direction: column;
+
+    &>.label {
+        height: 15px;
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+
+    &>.input {
+        padding: 10px;
+        border: solid 1px #8d8d8d;
+
+        &:hover, &:focus {
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.356);
+            z-index: 1;
+            outline: none;
+        }
+    }
+
+    &>textarea {
+        resize: vertical;
+    }
+
+    &>.error {
+        color: rgb(255, 0, 0);
+        height: 15px;
+        margin-top: 8px;
+        font-size: 14px;
+    }
+}
