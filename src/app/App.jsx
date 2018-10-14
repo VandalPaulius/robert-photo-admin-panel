@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { LoadingIcon } from 'components';
 import styles from './styles.scss';
-import { Sidebar /* Gallery, About, Contact */ } from './components';
+import { Sidebar /* Gallery, About */, Contact } from './components';
 
 class App extends React.Component {
     constructor(props) {
@@ -106,17 +106,16 @@ class App extends React.Component {
                             description={this.state.config.aboutMe}
                         />
                     )}
-                />
+                /> */}
                 <Route
                     path="/contact"
                     render={() => (
                         <Contact
-                            caption={this.state.config.contact.contactCaption}
-                            emailPlaceholder={this.state.config.contact.emailPlaceholder}
-                            messagePlaceholder={this.state.config.contact.messagePlaceholder}
+                            config={this.state.config.contact}
+                            
                         />
                     )}
-                /> */}
+                />
             </div>
         );
     }
