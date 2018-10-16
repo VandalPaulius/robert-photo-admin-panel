@@ -115,8 +115,6 @@ class Sidebar extends React.Component {
     }
 
     render() {
-        console.log('Sidebar this.state: ', this.state)
-
         return (
             <div className={styles.sidebar}>
                 <Expandable

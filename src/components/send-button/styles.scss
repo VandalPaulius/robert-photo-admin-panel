@@ -1,0 +1,48 @@
+.button {
+    cursor: pointer;
+    background: #252525;
+    color: #FFFFFF;
+    font-size: 17px;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.356);
+    transition: background 0.1s ease-out;
+    user-select: none;
+
+    &:hover {
+        color: #000000;
+        background-color: #FFFFFF;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.356);
+        z-index: 1;
+    }
+
+    .content {
+        position: relative;
+
+        &> .iconContainer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &>.checkMarkIcon {
+                height: 20px;
+                width: 20px;
+            }
+
+            &>.loadingIcon {
+                height: 25px;
+                width: 25px;
+            }
+        }
+    }
+    
+    .hide {
+        visibility: hidden;
+    }
+}

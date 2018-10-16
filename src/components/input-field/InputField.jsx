@@ -4,7 +4,7 @@ import styles from './styles.scss';
 
 function InputField(props) {
     return (
-        <div className={`${styles.iputField} ${props.className}`}>
+        <div className={`${styles.inputField} ${props.className}`}>
             <div className={styles.label}>
                 {props.label}
             </div>
@@ -16,6 +16,7 @@ function InputField(props) {
                     style={{
                         minHeight: props.minTextareaHeight,
                     }}
+                    defaultValue={props.defaultValue}
                 />
             ) : (
                 <input
@@ -23,6 +24,7 @@ function InputField(props) {
                     placeholder={props.placeholder}
                     ref={props.setRef}
                     type={props.type}
+                    defaultValue={props.defaultValue}
                 />
             )}
             <div className={styles.error}>
@@ -41,6 +43,7 @@ InputField.propTypes = {
     error: PropTypes.string,
     textarea: PropTypes.bool,
     minTextareaHeight: PropTypes.string,
+    defaultValue: PropTypes.string,
 };
 
 InputField.defaultProps = {
@@ -52,6 +55,7 @@ InputField.defaultProps = {
     error: '',
     textarea: false,
     minTextareaHeight: '40px',
+    defaultValue: '',
 };
 
 export default InputField;

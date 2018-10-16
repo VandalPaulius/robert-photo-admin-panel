@@ -112,7 +112,7 @@ class App extends React.Component {
                     render={() => (
                         <Contact
                             config={this.state.config.contact}
-                            
+                            onSave={(data) => { console.log('onSave: data: ', data); }}
                         />
                     )}
                 />
