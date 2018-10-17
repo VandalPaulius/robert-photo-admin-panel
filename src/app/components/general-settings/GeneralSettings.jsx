@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { InputField, SendButton } from 'components';
 import styles from './styles.scss';
 
-class Contact extends React.Component {
+class GeneralSettings extends React.Component {
     constructor(props) {
         super(props);
 
@@ -69,23 +69,23 @@ class Contact extends React.Component {
                 <div className={styles.content}>
                     <InputField
                         className={styles.inputField}
-                        label="Caption"
+                        label="Website name"
                         setRef={ref => this.actions.setRef(ref, 'caption')}
-                        defaultValue={this.props.config.contactCaption}
+                        defaultValue={this.props.config.websiteName}
+                        secondaryLabel="Required"
+                    />
+                    <InputField
+                        className={styles.inputField}
+                        label="Instagram URL"
+                        setRef={ref => this.actions.setRef(ref, 'instagramUrl')}
+                        defaultValue={this.props.config.instagramUrl}
                         secondaryLabel="Optional"
                     />
                     <InputField
                         className={styles.inputField}
-                        label="Email placeholder"
-                        setRef={ref => this.actions.setRef(ref, 'emailPlaceholder')}
-                        defaultValue={this.props.config.emailPlaceholder}
-                        secondaryLabel="Optional"
-                    />
-                    <InputField
-                        className={styles.inputField}
-                        label="Message placeholder"
-                        setRef={ref => this.actions.setRef(ref, 'messagePlaceholder')}
-                        defaultValue={this.props.config.messagePlaceholder}
+                        label="Copyright note"
+                        setRef={ref => this.actions.setRef(ref, 'copyrightNote')}
+                        defaultValue={this.props.config.copyrightNote}
                         secondaryLabel="Optional"
                     />
                     <div className={styles.buttonContainer}>
@@ -107,18 +107,18 @@ class Contact extends React.Component {
     }
 }
 
-Contact.propTypes = {
+GeneralSettings.propTypes = {
     onSave: PropTypes.func,
     config: PropTypes.shape({
-        contactCaption: PropTypes.string,
-        emailPlaceholder: PropTypes.string,
-        messagePlaceholder: PropTypes.string,
+        websiteName: PropTypes.string,
+        copyrightNote: PropTypes.string,
+        instagramUrl: PropTypes.string,
     }),
 };
 
-Contact.defaultProps = {
+GeneralSettings.defaultProps = {
     onSave: () => {},
     config: {},
 };
 
-export default Contact;
+export default GeneralSettings;

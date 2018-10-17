@@ -2,7 +2,12 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { LoadingIcon } from 'components';
 import styles from './styles.scss';
-import { Sidebar /* Gallery, About */, Contact } from './components';
+import {
+    Sidebar,
+    /* Gallery, About */
+    Contact,
+    GeneralSettings,
+} from './components';
 
 class App extends React.Component {
     constructor(props) {
@@ -27,9 +32,7 @@ class App extends React.Component {
                     this.setState({
                         loaded: true,
                         config: {
-                            websiteName: 'Robert Photo',
-                            websiteUrl: 'robert-photo.co.uk',
-                            aboutMe: [{
+                            about: [{
                                 id: 'asdasd',
                                 image: true,
                                 alt: 'Fabulous Rob',
@@ -53,8 +56,6 @@ class App extends React.Component {
                                 text: true,
                                 content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum'
                             }],
-                            copyrightNote: 'Robert Arthur Photography ©',
-                            instagramUrl: 'https://www.instagram.com/ridebmx/?hl=en',
                             contact: {
                                 contactCaption: 'Fancy a chat?',
                                 messagePlaceholder: 'Hi, ...',
@@ -65,6 +66,11 @@ class App extends React.Component {
                                 orderPrintButtonContent: 'Send Enquiry',
                                 orderMessagePlaceholder: 'Hi, my address is...',
                                 orderEmailPlaceholder: 'Email',
+                            },
+                            general: {
+                                websiteName: 'Robert Photo',
+                                copyrightNote: 'Robert Arthur Photography ©',
+                                instagramUrl: 'https://www.instagram.com/ridebmx/?hl=en',
                             },
                         },
                     });
@@ -112,7 +118,16 @@ class App extends React.Component {
                     render={() => (
                         <Contact
                             config={this.state.config.contact}
-                            onSave={(data) => { console.log('onSave: data: ', data); }}
+                            onSave={(data) => { console.log('Contact onSave: data: ', data); }}
+                        />
+                    )}
+                />
+                <Route
+                    path="/general"
+                    render={() => (
+                        <GeneralSettings
+                            config={this.state.config.general}
+                            onSave={(data) => { console.log('GeneralSettings onSave: data: ', data); }}
                         />
                     )}
                 />
@@ -127,7 +142,7 @@ class App extends React.Component {
                     {this.state.loaded ? (
                         <React.Fragment>
                             <div className={styles.header}>
-                                {`${this.state.config.websiteUrl} Admin Panel`}
+                                {`${this.state.config.general.websiteName} Admin Panel`}
                             </div>
                             <div className={styles.mainContent}>
                                 <Sidebar />

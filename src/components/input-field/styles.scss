@@ -2,10 +2,22 @@
     display: flex;
     flex-direction: column;
 
-    &>.label {
-        height: 15px;
-        margin-bottom: 10px;
-        font-size: 14px;
+    &>.labelContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        &>.label {
+            height: 15px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        &>.secondaryLabel {
+            color: #acacac;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
     }
 
     &>.input {

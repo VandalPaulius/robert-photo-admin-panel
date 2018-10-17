@@ -5,8 +5,15 @@ import styles from './styles.scss';
 function InputField(props) {
     return (
         <div className={`${styles.inputField} ${props.className}`}>
-            <div className={styles.label}>
-                {props.label}
+            <div className={styles.labelContainer}>
+                <div className={styles.label}>
+                    {props.label}
+                </div>
+                {props.secondaryLabel && (
+                    <div className={styles.secondaryLabel}>
+                        {props.secondaryLabel}
+                    </div>
+                )}
             </div>
             {props.textarea ? (
                 <textarea
@@ -44,6 +51,7 @@ InputField.propTypes = {
     textarea: PropTypes.bool,
     minTextareaHeight: PropTypes.string,
     defaultValue: PropTypes.string,
+    secondaryLabel: PropTypes.string,
 };
 
 InputField.defaultProps = {
@@ -56,6 +64,7 @@ InputField.defaultProps = {
     textarea: false,
     minTextareaHeight: '40px',
     defaultValue: '',
+    secondaryLabel: '',
 };
 
 export default InputField;
