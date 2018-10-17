@@ -4,7 +4,8 @@ import { LoadingIcon } from 'components';
 import styles from './styles.scss';
 import {
     Sidebar,
-    /* Gallery, About */
+    /* Gallery, */
+    About,
     Contact,
     GeneralSettings,
 } from './components';
@@ -113,6 +114,15 @@ class App extends React.Component {
                         />
                     )}
                 /> */}
+                <Route
+                    path="/about"
+                    render={() => (
+                        <About
+                            config={this.state.config.about}
+                            onSave={(data) => { console.log('About onSave: data: ', data); }}
+                        />
+                    )}
+                />
                 <Route
                     path="/contact"
                     render={() => (

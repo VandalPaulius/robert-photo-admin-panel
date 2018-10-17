@@ -1,33 +1,26 @@
-.about {
-    display: flex;
-    justify-content: center;
-    
+.contact {
     .content {
+        margin: 20px;
         max-width: 700px;
-        display: flex;
-        flex-wrap: wrap;
 
-        .imageContainer {
-            &>.image {
-                width: 99%;
-                height: auto;
-
-                max-width: 100%;
-                max-height: 100%;
-            }
+        &>.inputField {
+            margin: 15px 0;
         }
 
-        .text {
-            color: #000000;
-            margin: 20px;
+        &>.buttonContainer {
+            display: flex;
+            justify-content: flex-end;
+        }
 
-            &.heading {
-                font-size: 30px;
-                font-weight: 700;
-
-                &.textAfter {
-                    margin-bottom: 0;
-                }
+        &>.saveErrorContainer {
+            display: flex;
+            justify-content: flex-end;
+            
+            &>.error {
+                color: rgb(255, 0, 0);
+                height: 15px;
+                margin-top: 8px;
+                font-size: 14px;
             }
         }
     }
