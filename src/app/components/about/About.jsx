@@ -79,19 +79,15 @@ class About extends React.Component {
         );
 
         return (
-            <div>
-                <div>
-                    Add
-                </div>
+            <div className={styles.addButtonContainer}>
                 <AddButton
-                    text="Heading"
-                    
+                    text="+  Heading"
                 />
                 <AddButton
-                    text="Text box"
+                    text="+  Text box"
                 />
                 <AddButton
-                    text="Picture"
+                    text="+  Picture"
                 />
             </div>
         );
