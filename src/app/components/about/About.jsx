@@ -22,6 +22,7 @@ class About extends React.Component {
         this.saveButtonHandler = this.saveButtonHandler.bind(this);
     }
 
+    // eslint-disable-next-line react/sort-comp
     initActions() {
         return {
             setRef: (ref, name) => {
@@ -36,13 +37,7 @@ class About extends React.Component {
             },
             setSaveError: saveError => this.setState({ saveError }),
             setSaveStatus: saveStatus => this.setState({ saveStatus }),
-            // addComponent: componentType => this.setState(prevState => ({
-            //     components: [
-            //         ...prevState.components,
-            //         componentType,
-            //     ],
-            // })),
-            addComponent: (componentType, addAfterId) => {
+            addComponent: ({ componentType, addAfterId, defaultValue }) => {
                 this.setState((prevState) => {
                     const componentLabels = {
                         heading: 'Heading',
@@ -57,6 +52,7 @@ class About extends React.Component {
                         label: componentLabels[componentType],
                         refName: `${componentType}-${id}`,
                         type: componentType,
+                        defaultValue: defaultValue || '',
                     };
 
                     const componentConfigs = [];
@@ -79,7 +75,43 @@ class About extends React.Component {
                     return ({ componentConfigs });
                 });
             },
+            loadDefaultValues: (incomingConfigs) => {
+                const componentConfigs = incomingConfigs.map((incomingConfig) => {
+                    const component = {};
+                    component.id = incomingConfig.id;
+
+                    if (incomingConfig.image) {
+                        component.label = 'Picture URL';
+                        component.defaultValue = incomingConfig.url;
+                        component.componentType = 'picture';
+                    } else if (incomingConfig.text) {
+                        component.defaultValue = incomingConfig.content;
+
+                        if (incomingConfig.heading) {
+                            component.label = 'Heading';
+                            component.componentType = 'heading';
+                        } else {
+                            component.label = 'Text field';
+                            component.componentType = 'text';
+                        }
+                    }
+
+                    return component;
+                });
+
+                this.setState({ componentConfigs });
+            },
         };
+    }
+
+    componentDidMount() {
+        this.actions.loadDefaultValues(this.props.config);
+    }
+
+    componentDidUpdate(prevProps) {
+        if (JSON.stringify(prevProps.config) !== JSON.stringify(this.props.config)) {
+            this.actions.loadDefaultValues(this.props.config);
+        }
     }
 
     saveButtonHandler() {
@@ -127,15 +159,24 @@ class About extends React.Component {
             <div className={styles.addButtonContainer}>
                 <AddButton
                     text="+  Heading"
-                    onClick={() => this.actions.addComponent('heading', addAfterId)}
+                    onClick={() => this.actions.addComponent({
+                        componentType: 'heading',
+                        addAfterId,
+                    })}
                 />
                 <AddButton
                     text="+  Text box"
-                    onClick={() => this.actions.addComponent('text', addAfterId)}
+                    onClick={() => this.actions.addComponent({
+                        componentType: 'text',
+                        addAfterId,
+                    })}
                 />
                 <AddButton
                     text="+  Picture"
-                    onClick={() => this.actions.addComponent('picture', addAfterId)}
+                    onClick={() => this.actions.addComponent({
+                        componentType: 'picture',
+                        addAfterId,
+                    })}
                 />
             </div>
         );
@@ -148,7 +189,7 @@ class About extends React.Component {
                     className={styles.inputField}
                     label={config.label}
                     setRef={ref => this.actions.setRef(ref, config.refName)}
-                    // defaultValue={this.props.config.contactCaption}
+                    defaultValue={config.defaultValue}
                     secondaryLabel="Optional"
                 />
                 <div>
@@ -160,6 +201,7 @@ class About extends React.Component {
 
     render() {
         console.log('About: this.state: ', this.state)
+        console.log('About: this.props: ', this.props)
 
         return (
             <div className={styles.contact}>
