@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import uuid from 'uuid/v4';
 import { InputField, SendButton } from 'components';
 import styles from './styles.scss';
 
@@ -11,6 +12,7 @@ class About extends React.Component {
             refs: {},
             saveError: '',
             saveStatus: '',
+            componentConfigs: [],
         };
 
         this.actions = this.initActions();
@@ -33,7 +35,50 @@ class About extends React.Component {
                 }
             },
             setSaveError: saveError => this.setState({ saveError }),
-            setSaveStatus: saveStatus => this.setState({ saveStatus }), 
+            setSaveStatus: saveStatus => this.setState({ saveStatus }),
+            // addComponent: componentType => this.setState(prevState => ({
+            //     components: [
+            //         ...prevState.components,
+            //         componentType,
+            //     ],
+            // })),
+            addComponent: (componentType, addAfterId) => {
+                this.setState((prevState) => {
+                    const componentLabels = {
+                        heading: 'Heading',
+                        text: 'Text field',
+                        picture: 'Picture URL',
+                    };
+
+                    const id = uuid();
+
+                    const newComponentConfig = {
+                        id,
+                        label: componentLabels[componentType],
+                        refName: `${componentType}-${id}`,
+                        type: componentType,
+                    };
+
+                    const componentConfigs = [];
+                    if (!addAfterId) {
+                        componentConfigs.push(newComponentConfig);
+
+                        prevState.componentConfigs.map((config) => {
+                            componentConfigs.push(config);
+                        });
+                    } else {
+                        prevState.componentConfigs.map((config) => {
+                            componentConfigs.push(config);
+    
+                            if (config.id === addAfterId) {
+                                componentConfigs.push(newComponentConfig);
+                            }
+                        });
+                    }
+
+                    return ({ componentConfigs });
+                });
+            },
         };
     }
 
@@ -63,7 +108,7 @@ class About extends React.Component {
         });
     }
 
-    renderAddButtons() {
+    renderAddButtons(addAfterId) {
         const AddButton = ({
             text,
             onClick,
@@ -82,39 +127,50 @@ class About extends React.Component {
             <div className={styles.addButtonContainer}>
                 <AddButton
                     text="+  Heading"
+                    onClick={() => this.actions.addComponent('heading', addAfterId)}
                 />
                 <AddButton
                     text="+  Text box"
+                    onClick={() => this.actions.addComponent('text', addAfterId)}
                 />
                 <AddButton
                     text="+  Picture"
+                    onClick={() => this.actions.addComponent('picture', addAfterId)}
                 />
             </div>
         );
     }
 
-    renderInputField() {
+    renderInputField(config) {
         return (
-            <div>
+            <div key={config.id}>
                 <InputField
                     className={styles.inputField}
-                    label="Caption"
-                    setRef={ref => this.actions.setRef(ref, 'caption')}
-                    defaultValue={this.props.config.contactCaption}
+                    label={config.label}
+                    setRef={ref => this.actions.setRef(ref, config.refName)}
+                    // defaultValue={this.props.config.contactCaption}
                     secondaryLabel="Optional"
                 />
                 <div>
-                    {this.renderAddButtons()}
+                    {this.renderAddButtons(config.id)}
                 </div>
             </div>
         );
     }
 
     render() {
+        console.log('About: this.state: ', this.state)
+
         return (
             <div className={styles.contact}>
                 <div className={styles.content}>
-                    {this.renderInputField()}
+                    {/* {this.renderInputField()} */}
+                    <div>
+                        {this.renderAddButtons()}
+                    </div>
+                    {this.state.componentConfigs.map(
+                        componentConfig => this.renderInputField(componentConfig),
+                    )}
                     <div className={styles.buttonContainer}>
                         <SendButton
                             onClick={this.saveButtonHandler}

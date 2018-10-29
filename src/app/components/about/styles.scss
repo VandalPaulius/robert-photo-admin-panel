@@ -3,13 +3,14 @@
         margin: 20px;
         max-width: 700px;
 
-        &>.inputField {
+        .inputField {
             margin: 15px 0;
         }
 
         &>.buttonContainer {
             display: flex;
             justify-content: flex-end;
+            margin-top: 35px;
         }
 
         &>.saveErrorContainer {
@@ -41,12 +42,15 @@
                 transition: background 0.1s ease-out;
                 user-select: none;
                 margin: 5px;
+                border: 1px solid #000000;
 
                 &:hover {
                     color: #000000;
                     background-color: #FFFFFF;
                     box-shadow: 0 0 10px rgba(0, 0, 0, 0.356);
                     z-index: 1;
+                    border: none;
+                    border: 1px solid #FFFFFF;
                 }
             }
         }
