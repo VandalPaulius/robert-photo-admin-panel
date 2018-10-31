@@ -93,7 +93,7 @@ class App extends React.Component {
 
     renderRoutes() {
         return (
-            <div className={styles.routes}>
+            <React.Fragment>
                 {/* <Route
                     exact
                     path="/"
@@ -141,7 +141,7 @@ class App extends React.Component {
                         />
                     )}
                 />
-            </div>
+            </React.Fragment>
         );
     }
 
@@ -156,24 +156,13 @@ class App extends React.Component {
                             </div>
                             <div className={styles.mainContentWrapper}>
                                 <div className={styles.mainContent}>
-                                    {/* <div className={styles.sidebar}>
-                                        Sidebar
-                                    </div>
-                                    <div className={styles.content}>
-                                        Content
-                                    </div> */}
-
-                                    <div className={styles.sidebar}>
+                                    <div>
                                         <Sidebar />
                                     </div>
-                                    <div className={styles.content}>
+                                    <div className={styles.routes}>
                                         {this.renderRoutes()}
                                     </div>
-
-                                    {/* <Sidebar /> */}
-                                    {/* {this.renderRoutes()} */}
                                 </div>
-                                
                             </div>
                         </React.Fragment>
                     ) : (

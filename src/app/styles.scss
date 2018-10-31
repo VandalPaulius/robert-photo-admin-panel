@@ -32,33 +32,17 @@ html {
     }
     
     .mainContentWrapper {
-        background: red;
         flex-grow: 1;
         display: flex;
 
         .mainContent {
-            background: magenta;
             flex-grow: 1;
             display: flex;
 
-            .sidebar {
-                background: blue;
-            }
-
-            .content {
-                background: rgb(0, 255, 157);
+            .routes {
                 flex-grow: 1;
                 overflow: auto;
             }
-    
-            // display: flex;
-
-            
-            // &>.routes {
-            //     flex-grow: 1;
-            //     overflow: auto;
-    
-            // }
         }
     }
     
