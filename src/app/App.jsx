@@ -154,9 +154,26 @@ class App extends React.Component {
                             <div className={styles.header}>
                                 {`${this.state.config.general.websiteName} Admin Panel`}
                             </div>
-                            <div className={styles.mainContent}>
-                                <Sidebar />
-                                {this.renderRoutes()}
+                            <div className={styles.mainContentWrapper}>
+                                <div className={styles.mainContent}>
+                                    {/* <div className={styles.sidebar}>
+                                        Sidebar
+                                    </div>
+                                    <div className={styles.content}>
+                                        Content
+                                    </div> */}
+
+                                    <div className={styles.sidebar}>
+                                        <Sidebar />
+                                    </div>
+                                    <div className={styles.content}>
+                                        {this.renderRoutes()}
+                                    </div>
+
+                                    {/* <Sidebar /> */}
+                                    {/* {this.renderRoutes()} */}
+                                </div>
+                                
                             </div>
                         </React.Fragment>
                     ) : (
