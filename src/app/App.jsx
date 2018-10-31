@@ -4,7 +4,8 @@ import { LoadingIcon } from 'components';
 import styles from './styles.scss';
 import {
     Sidebar,
-    /* Gallery, About */
+    /* Gallery, */
+    About,
     Contact,
     GeneralSettings,
 } from './components';
@@ -92,7 +93,7 @@ class App extends React.Component {
 
     renderRoutes() {
         return (
-            <div className={styles.routes}>
+            <React.Fragment>
                 {/* <Route
                     exact
                     path="/"
@@ -114,6 +115,15 @@ class App extends React.Component {
                     )}
                 /> */}
                 <Route
+                    path="/about"
+                    render={() => (
+                        <About
+                            config={this.state.config.about}
+                            onSave={(data) => { console.log('About onSave: data: ', data); }}
+                        />
+                    )}
+                />
+                <Route
                     path="/contact"
                     render={() => (
                         <Contact
@@ -131,7 +141,7 @@ class App extends React.Component {
                         />
                     )}
                 />
-            </div>
+            </React.Fragment>
         );
     }
 
@@ -144,9 +154,15 @@ class App extends React.Component {
                             <div className={styles.header}>
                                 {`${this.state.config.general.websiteName} Admin Panel`}
                             </div>
-                            <div className={styles.mainContent}>
-                                <Sidebar />
-                                {this.renderRoutes()}
+                            <div className={styles.mainContentWrapper}>
+                                <div className={styles.mainContent}>
+                                    <div>
+                                        <Sidebar />
+                                    </div>
+                                    <div className={styles.routes}>
+                                        {this.renderRoutes()}
+                                    </div>
+                                </div>
                             </div>
                         </React.Fragment>
                     ) : (
