@@ -35,8 +35,16 @@ class About extends React.Component {
                     }));
                 }
             },
-            setSaveError: saveError => this.setState({ saveError }),
-            setSaveStatus: saveStatus => this.setState({ saveStatus }),
+            setSaveError: saveError => {
+                if (this.state.saveError !== saveError) {
+                    this.setState({ saveError });
+                }
+            },
+            setSaveStatus: saveStatus => {
+                if (this.state.saveStatus !== saveStatus) {
+                    this.setState({ saveStatus });
+                }
+            },
             addComponent: ({ componentType, addAfterId, defaultValue }) => {
                 this.setState((prevState) => {
                     const componentLabels = {
@@ -96,6 +104,8 @@ class About extends React.Component {
                         }
                     }
 
+                    component.refName = `${component.componentType}-${component.id}`;
+
                     return component;
                 });
 
@@ -115,21 +125,35 @@ class About extends React.Component {
     }
 
     saveButtonHandler() {
-        const getInputValues = () => {
-            const values = {};
+        const getConfigs = () => {
+            const getInputValue = refName => this.state.refs[refName].value;
 
-            Object.keys(this.state.refs).map((key) => {
-                values[key] = this.state.refs[key].value;
+            return this.state.componentConfigs.map((configRaw) => {
+                const config = {};
+                config.id = configRaw.id;
+
+                if (configRaw.componentType === 'picture') {
+                    config.image = true;
+                    config.alt = 'About page picture';
+                    config.url = getInputValue(configRaw.refName);
+                } else if (configRaw.componentType === 'text') {
+                    config.text = true;
+                    config.content = getInputValue(configRaw.refName);
+                } else if (configRaw.componentType === 'heading') {
+                    config.text = true;
+                    config.heading = true;
+                    config.content = getInputValue(configRaw.refName);
+                }
+
+                return config;
             });
-
-            return values;
         };
 
         this.actions.setSaveStatus('loading');
         this.actions.setSaveError('');
 
         this.props.onSave({
-            data: getInputValues(),
+            data: getConfigs(),
             onError: (error) => {
                 this.actions.setSaveStatus('');
                 this.actions.setSaveError(error);
