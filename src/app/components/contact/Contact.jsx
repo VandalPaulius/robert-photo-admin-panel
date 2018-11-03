@@ -70,7 +70,7 @@ class Contact extends React.Component {
                     <InputField
                         className={styles.inputField}
                         label="Caption"
-                        setRef={ref => this.actions.setRef(ref, 'caption')}
+                        setRef={ref => this.actions.setRef(ref, 'contactCaption')}
                         defaultValue={this.props.config.contactCaption}
                         secondaryLabel="Optional"
                     />

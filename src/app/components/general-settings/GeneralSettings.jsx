@@ -70,7 +70,7 @@ class GeneralSettings extends React.Component {
                     <InputField
                         className={styles.inputField}
                         label="Website name"
-                        setRef={ref => this.actions.setRef(ref, 'caption')}
+                        setRef={ref => this.actions.setRef(ref, 'websiteName')}
                         defaultValue={this.props.config.websiteName}
                         secondaryLabel="Required"
                     />
