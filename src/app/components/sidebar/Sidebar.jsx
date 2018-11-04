@@ -26,13 +26,19 @@ class Sidebar extends React.Component {
                 this.setState({ open });
             },
             updateOpenCloseEnabled: (openCloseEnabled) => {
+                if (openCloseEnabled) {
+                    this.props.onCollapsable();
+                } else {
+                    this.props.onStatic();
+                }
+
                 this.setState({ openCloseEnabled });
             },
         };
     }
 
     componentDidMount() {
-        this.windowResizeListener()
+        this.windowResizeListener();
         window.addEventListener('resize', this.windowResizeListener);
     }
 
@@ -141,9 +147,13 @@ Sidebar.propTypes = {
     location: PropTypes.shape({
         pathname: PropTypes.string,
     }).isRequired,
+    onCollapsable: PropTypes.func,
+    onStatic: PropTypes.func,
 };
 
 Sidebar.defaultProps = {
+    onCollapsable: () => {},
+    onStatic: () => {},
 };
 
 export default withRouter(Sidebar);
