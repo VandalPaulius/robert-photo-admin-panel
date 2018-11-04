@@ -111,6 +111,12 @@ class About extends React.Component {
 
                 this.setState({ componentConfigs });
             },
+            removeComponent: (configId) => {
+                this.setState(prevState => ({
+                    componentConfigs: prevState.componentConfigs
+                        .filter(config => config.id !== configId),
+                }));
+            },
         };
     }
 
@@ -195,6 +201,15 @@ class About extends React.Component {
     renderInputField(config) {
         return (
             <div key={config.id}>
+                <div className={styles.removeButtonContainer}>
+                    <HollowButton
+                        text="Remove"
+                        onClick={() => {
+                            console.log('remove')
+                            this.actions.removeComponent(config.id);
+                        }}
+                    />
+                </div>
                 <InputField
                     className={styles.inputField}
                     label={config.label}
@@ -244,9 +259,7 @@ class About extends React.Component {
 
 About.propTypes = {
     onSave: PropTypes.func,
-    config: PropTypes.arrayOf(PropTypes.shape({
-
-    })),
+    config: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
 About.defaultProps = {

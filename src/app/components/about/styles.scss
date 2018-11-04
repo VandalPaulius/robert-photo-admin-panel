@@ -7,6 +7,10 @@
             margin: 15px 0;
         }
 
+        .removeButtonContainer {
+            display: flex;
+        }
+
         &>.buttonContainer {
             display: flex;
             justify-content: flex-end;

@@ -5,7 +5,7 @@ import styles from './styles.scss';
 function HollowButton(props) {
     return (
         <div
-            className={styles.hollowButton}
+            className={`${styles.hollowButton} ${props.className}`}
             tabIndex={0}
             role="button"
             onClick={props.onClick}
@@ -16,11 +16,13 @@ function HollowButton(props) {
 }
 
 HollowButton.propTypes = {
+    className: PropTypes.string,
     onClick: PropTypes.func,
     text: PropTypes.string,
 };
 
 HollowButton.defaultProps = {
+    className: '',
     onClick: () => {},
     text: '',
 };
