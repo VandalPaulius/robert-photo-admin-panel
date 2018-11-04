@@ -8,29 +8,41 @@ class SendButton extends React.Component {
         super(props);
 
         this.state = {
-            isHovered: false,
+            inverted: false,
         };
 
         this.actions = this.initActions();
     }
 
+    // eslint-disable-next-line react/sort-comp
     initActions() {
         return {
-            toggleHoverState: () => this.setState(prevState => ({
-                isHovered: !prevState.isHovered,
+            toggleInvertedState: () => this.setState(prevState => ({
+                inverted: !prevState.inverted,
             })),
+            setInverted: inverted => this.setState({ inverted }),
         };
+    }
+
+    componentDidMount() {
+        this.actions.setInverted(this.props.inverted);
+    }
+
+    componentDidUpdate(prevState, prevProps) {
+        if (prevProps.inverted !== this.props.inverted) {
+            this.actions.setInverted(this.props.inverted);
+        }
     }
 
     render() {
         return (
             <div
-                className={`${styles.button} ${ this.state.isHovered && !this.props.inverted ? styles.inverted : ''} ${this.props.className}`}
+                className={`${styles.button} ${this.state.inverted ? styles.inverted : ''} ${this.props.className}`}
                 onClick={this.props.onClick}
                 role="button"
                 tabIndex={0}
-                onMouseEnter={() => this.actions.toggleHoverState()}
-                onMouseLeave={() => this.actions.toggleHoverState()}
+                onMouseEnter={() => this.actions.toggleInvertedState()}
+                onMouseLeave={() => this.actions.toggleInvertedState()}
             >
                 <div className={styles.content}>
                     <div className={this.props.status ? styles.hide : ''}>
@@ -39,13 +51,13 @@ class SendButton extends React.Component {
                     <div className={`${styles.iconContainer} ${this.props.status === 'loading' ? '' : styles.hide}`}>
                         <LoadingIcon
                             className={styles.loadingIcon}
-                            style={{ color: this.state.isHovered && !this.props.inverted ? '#000000' : '#FFFFFF' }}
+                            style={{ color: this.state.inverted ? '#000000' : '#FFFFFF' }}
                         />
                     </div>
                     <div className={`${styles.iconContainer} ${this.props.status === 'success' ? '' : styles.hide}`}>
                         <CheckIcon
                             className={styles.checkMarkIcon}
-                            style={{ color: this.state.isHovered && !this.props.inverted ? '#000000' : '#FFFFFF' }}
+                            style={{ color: this.state.inverted ? '#000000' : '#FFFFFF' }}
                         />
                     </div>
                 </div>
