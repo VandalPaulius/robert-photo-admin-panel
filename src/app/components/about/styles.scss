@@ -29,30 +29,6 @@
             display: flex;
             justify-content: flex-end;
             flex-wrap: wrap;
-
-            &>.addButton {
-                cursor: pointer;
-                background: #d1d1d1;
-                color: #000000;
-                font-size: 14px;
-                padding: 7px 15px;
-                display: flex;
-                justify-content: center;
-                box-shadow: 0 0 6px rgba(0, 0, 0, 0.356);
-                transition: background 0.1s ease-out;
-                user-select: none;
-                margin: 5px;
-                border: 1px solid #000000;
-
-                &:hover {
-                    color: #000000;
-                    background-color: #FFFFFF;
-                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.356);
-                    z-index: 1;
-                    border: none;
-                    border: 1px solid #FFFFFF;
-                }
-            }
         }
     }    
 }

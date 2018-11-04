@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import uuid from 'uuid/v4';
-import { InputField, SendButton } from 'components';
+import { InputField, SendButton, HollowButton } from 'components';
 import styles from './styles.scss';
 
 class About extends React.Component {
@@ -165,37 +165,23 @@ class About extends React.Component {
     }
 
     renderAddButtons(addAfterId) {
-        const AddButton = ({
-            text,
-            onClick,
-        }) => (
-            <div
-                className={styles.addButton}
-                tabIndex={0}
-                role="button"
-                onClick={onClick}
-            >
-                {text}
-            </div>
-        );
-
         return (
             <div className={styles.addButtonContainer}>
-                <AddButton
+                <HollowButton
                     text="+  Heading"
                     onClick={() => this.actions.addComponent({
                         componentType: 'heading',
                         addAfterId,
                     })}
                 />
-                <AddButton
+                <HollowButton
                     text="+  Text box"
                     onClick={() => this.actions.addComponent({
                         componentType: 'text',
                         addAfterId,
                     })}
                 />
-                <AddButton
+                <HollowButton
                     text="+  Picture"
                     onClick={() => this.actions.addComponent({
                         componentType: 'picture',
