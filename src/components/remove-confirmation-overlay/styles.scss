@@ -1,0 +1,29 @@
+.removeConfirmationOverlay {
+    background: #000000B8;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .content {
+        background: #FFFFFF;
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.356);
+        padding: 25px;
+        min-width: 250px;
+
+        &>.message {
+            display: flex;
+            justify-content: center;
+        }
+
+        &>.buttonContainer {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-evenly;
+        }
+    }
+}

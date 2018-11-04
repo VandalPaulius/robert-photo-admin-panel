@@ -16,21 +16,21 @@ class SendButton extends React.Component {
 
     initActions() {
         return {
-            updateHoverState: (isHovered) => {
-                this.setState({ isHovered });
-            },
+            toggleHoverState: () => this.setState(prevState => ({
+                isHovered: !prevState.isHovered,
+            })),
         };
     }
 
     render() {
         return (
             <div
-                className={`${styles.button} ${this.props.className}`}
+                className={`${styles.button} ${ this.state.isHovered && !this.props.inverted ? styles.inverted : ''} ${this.props.className}`}
                 onClick={this.props.onClick}
                 role="button"
                 tabIndex={0}
-                onMouseEnter={() => this.actions.updateHoverState(true)}
-                onMouseLeave={() => this.actions.updateHoverState(false)}
+                onMouseEnter={() => this.actions.toggleHoverState()}
+                onMouseLeave={() => this.actions.toggleHoverState()}
             >
                 <div className={styles.content}>
                     <div className={this.props.status ? styles.hide : ''}>
@@ -39,13 +39,13 @@ class SendButton extends React.Component {
                     <div className={`${styles.iconContainer} ${this.props.status === 'loading' ? '' : styles.hide}`}>
                         <LoadingIcon
                             className={styles.loadingIcon}
-                            style={{ color: this.state.isHovered ? '#000000' : '#FFFFFF' }}
+                            style={{ color: this.state.isHovered && !this.props.inverted ? '#000000' : '#FFFFFF' }}
                         />
                     </div>
                     <div className={`${styles.iconContainer} ${this.props.status === 'success' ? '' : styles.hide}`}>
                         <CheckIcon
                             className={styles.checkMarkIcon}
-                            style={{ color: this.state.isHovered ? '#000000' : '#FFFFFF' }}
+                            style={{ color: this.state.isHovered && !this.props.inverted ? '#000000' : '#FFFFFF' }}
                         />
                     </div>
                 </div>
@@ -63,6 +63,7 @@ SendButton.propTypes = {
         PropTypes.node,
         PropTypes.arrayOf(PropTypes.node),
     ]),
+    inverted: PropTypes.bool,
 };
 
 SendButton.defaultProps = {
@@ -70,6 +71,7 @@ SendButton.defaultProps = {
     className: '',
     status: '',
     children: '',
+    inverted: false,
 };
 
 export default SendButton;
