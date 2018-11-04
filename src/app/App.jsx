@@ -17,7 +17,6 @@ class App extends React.Component {
         this.state = {
             config: {},
             loaded: false,
-            menuOpen: false,
             headerOffset: null,
         };
 
@@ -27,7 +26,6 @@ class App extends React.Component {
     // eslint-disable-next-line react/sort-comp
     initActions() {
         return {
-            toggleMenuOpen: menuOpen => this.setState({ menuOpen }),
             loadConfig: () => {
                 setTimeout(() => {
                     this.setState({
@@ -83,6 +81,9 @@ class App extends React.Component {
                         headerOffset: headerRef.offsetHeight,
                     });
                 }
+            },
+            toggleSidebarCollapsible: (sidebarCollapsible) => {
+                this.setState({ sidebarCollapsible });
             },
         };
     }
@@ -155,9 +156,20 @@ class App extends React.Component {
                                 {`${this.state.config.general.websiteName} Admin Panel`}
                             </div>
                             <div className={styles.mainContentWrapper}>
-                                <div className={styles.mainContent}>
-                                    <div>
-                                        <Sidebar />
+                                <div
+                                    className={`${styles.mainContent} ${
+                                        this.state.sidebarCollapsible ? styles.sidebarCollapsed : ''
+                                    }`}
+                                >
+                                    <div className={styles.sidebar}>
+                                        <Sidebar
+                                            onCollapsable={() => {
+                                                this.actions.toggleSidebarCollapsible(true);
+                                            }}
+                                            onStatic={() => {
+                                                this.actions.toggleSidebarCollapsible(false);
+                                            }}
+                                        />
                                     </div>
                                     <div className={styles.routes}>
                                         {this.renderRoutes()}
