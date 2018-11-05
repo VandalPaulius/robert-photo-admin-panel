@@ -1,10 +1,11 @@
 .removeConfirmationOverlay {
-    background: #000000B8;
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 2147483647;
+    background: #000000B8;
     display: flex;
     justify-content: center;
     align-items: center;
