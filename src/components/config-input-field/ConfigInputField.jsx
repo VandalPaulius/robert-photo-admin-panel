@@ -31,7 +31,7 @@ class ConfigInputField extends React.Component {
 
     renderButtonPanel() {
         return (
-            <div>
+            <div className={styles.buttonPanel}>
                 {this.props.onClickRemove && (
                     <HollowButton
                         text="Remove"
@@ -40,40 +40,44 @@ class ConfigInputField extends React.Component {
                         }}
                     />
                 )}
-                {this.props.onClickUp && (
-                    <HollowButton
-                        text="Move up"
-                        onClick={this.props.onClickUp}
-                    />
-                )}
-                {this.props.onClickDown && (
-                    <HollowButton
-                        text="Move down"
-                        onClick={this.props.onClickDown}
-                    />
-                )}
+                <div className={styles.upDownContainer}>
+                    {this.props.onClickUp && (
+                        <HollowButton
+                            text="Move up"
+                            onClick={this.props.onClickUp}
+                        />
+                    )}
+                    {this.props.onClickDown && (
+                        <HollowButton
+                            text="Move down"
+                            onClick={this.props.onClickDown}
+                        />
+                    )}
+                </div>
             </div>
         );
     }
 
     renderInput() {
         return (
-            <InputField
-                className={styles.inputField}
-                label={this.props.label}
-                setRef={this.props.setRef}
-                defaultValue={this.props.defaultValue}
-                secondaryLabel={this.props.secondaryLabel}
-                textarea={this.props.textarea}
-                minTextareaHeight="140px"
-            />
+            <div className={styles.inputFieldContainer}>
+                <InputField
+                    className={styles.inputField}
+                    label={this.props.label}
+                    setRef={this.props.setRef}
+                    defaultValue={this.props.defaultValue}
+                    secondaryLabel={this.props.secondaryLabel}
+                    textarea={this.props.textarea}
+                    minTextareaHeight="140px"
+                />
+            </div>
         );
     }
 
     render() {
         return (
             <div>
-                <div>
+                <div className={styles.configInputField}>
                     {this.renderInput()}
                     {this.renderButtonPanel()}
                 </div>

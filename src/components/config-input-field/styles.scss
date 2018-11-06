@@ -1,3 +1,24 @@
 .configInputField {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
 
+    &>.inputFieldContainer {
+        flex-grow: 2;
+        min-width: 350px;
+    }
+
+    &>.buttonPanel {
+        margin-left: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: space-between;
+
+        &>.upDownContainer {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+    }
 }
