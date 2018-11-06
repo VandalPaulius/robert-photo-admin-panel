@@ -5,10 +5,10 @@ import {
     InputField,
     SendButton,
     HollowButton,
-    RemoveConfirmationOverlay,
+    // RemoveConfirmationOverlay,
+    ConfigInputField,
 } from 'components';
 import styles from './styles.scss';
-import { debug } from 'util';
 
 class About extends React.Component {
     constructor(props) {
@@ -19,7 +19,7 @@ class About extends React.Component {
             saveError: '',
             saveStatus: '',
             componentConfigs: [],
-            confirmationOverlay: null,
+            // confirmationOverlay: null,
         };
 
         this.actions = this.initActions();
@@ -27,7 +27,7 @@ class About extends React.Component {
         this.actions.setSaveError = this.actions.setSaveError.bind(this);
         this.actions.setSaveStatus = this.actions.setSaveStatus.bind(this);
         this.saveButtonHandler = this.saveButtonHandler.bind(this);
-        this.actions.toggleConfirmationOverlay = this.actions.toggleConfirmationOverlay.bind(this);
+        // this.actions.toggleConfirmationOverlay = this.actions.toggleConfirmationOverlay.bind(this);
     }
 
     // eslint-disable-next-line react/sort-comp
@@ -125,22 +125,22 @@ class About extends React.Component {
                         .filter(config => config.id !== configId),
                 }));
             },
-            toggleConfirmationOverlay: ({
-                onRemove,
-                onCancel,
-                showOverlay,
-            }) => {
-                if (showOverlay) {
-                    this.setState({
-                        confirmationOverlay: {
-                            onRemove,
-                            onCancel,
-                        },
-                    });
-                } else {
-                    this.setState({ confirmationOverlay: null });
-                }
-            },
+            // toggleConfirmationOverlay: ({
+            //     onRemove,
+            //     onCancel,
+            //     showOverlay,
+            // }) => {
+            //     if (showOverlay) {
+            //         this.setState({
+            //             confirmationOverlay: {
+            //                 onRemove,
+            //                 onCancel,
+            //             },
+            //         });
+            //     } else {
+            //         this.setState({ confirmationOverlay: null });
+            //     }
+            // },
         };
     }
 
@@ -226,7 +226,7 @@ class About extends React.Component {
         return (
             <div key={config.id}>
                 <div className={styles.removeButtonContainer}>
-                    <HollowButton
+                    {/* <HollowButton
                         text="Remove"
                         onClick={() => {
                             this.actions.toggleConfirmationOverlay({
@@ -240,14 +240,23 @@ class About extends React.Component {
                                 }),
                             });
                         }}
-                    />
+                    /> */}
                 </div>
-                <InputField
+                {/* <InputField
                     className={styles.inputField}
                     label={config.label}
                     setRef={ref => this.actions.setRef(ref, config.refName)}
                     defaultValue={config.defaultValue}
                     secondaryLabel="Optional"
+                /> */}
+                <ConfigInputField
+                    label={config.label}
+                    setRef={ref => this.actions.setRef(ref, config.refName)}
+                    defaultValue={config.defaultValue}
+                    secondaryLabel="Optional"
+                    onClickRemove={() => this.actions.removeComponent(config.id)}
+                    onClickUp={() => { console.log('clickUp'); }}
+                    onClickDown={() => { console.log('clickDown'); }}
                 />
                 <div>
                     {this.renderAddButtons(config.id)}
@@ -281,12 +290,12 @@ class About extends React.Component {
                         </div>
                     </div>
                 </div>
-                {this.state.confirmationOverlay && (
+                {/* {this.state.confirmationOverlay && (
                     <RemoveConfirmationOverlay
                         onRemove={this.state.confirmationOverlay.onRemove}
                         onCancel={this.state.confirmationOverlay.onCancel}
                     />
-                )}
+                )} */}
             </div>
         );
     }
