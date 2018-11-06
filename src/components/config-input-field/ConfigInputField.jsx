@@ -64,6 +64,8 @@ class ConfigInputField extends React.Component {
                 setRef={this.props.setRef}
                 defaultValue={this.props.defaultValue}
                 secondaryLabel={this.props.secondaryLabel}
+                textarea={this.props.textarea}
+                minTextareaHeight="140px"
             />
         );
     }
@@ -95,6 +97,7 @@ ConfigInputField.propTypes = {
     defaultValue: PropTypes.string,
     label: PropTypes.string,
     secondaryLabel: PropTypes.string,
+    textarea: PropTypes.bool,
 };
 
 ConfigInputField.defaultProps = {
@@ -105,6 +108,7 @@ ConfigInputField.defaultProps = {
     defaultValue: '',
     label: '',
     secondaryLabel: '',
+    textarea: false,
 };
 
 export default ConfigInputField;

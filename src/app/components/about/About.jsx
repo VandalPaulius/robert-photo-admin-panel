@@ -257,6 +257,7 @@ class About extends React.Component {
                     onClickRemove={() => this.actions.removeComponent(config.id)}
                     onClickUp={() => { console.log('clickUp'); }}
                     onClickDown={() => { console.log('clickDown'); }}
+                    textarea={config.componentType === 'text' && true}
                 />
                 <div>
                     {this.renderAddButtons(config.id)}
@@ -266,6 +267,8 @@ class About extends React.Component {
     }
 
     render() {
+        console.log('About this.state: ', this.state)
+
         return (
             <div className={styles.contact}>
                 <div className={styles.content}>
