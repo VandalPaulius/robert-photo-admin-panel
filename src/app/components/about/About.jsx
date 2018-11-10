@@ -7,8 +7,8 @@ import {
     HollowButton,
     RemoveConfirmationOverlay,
 } from 'components';
-import styles from './styles.scss';
 import { debug } from 'util';
+import styles from './styles.scss';
 
 class About extends React.Component {
     constructor(props) {
@@ -81,7 +81,7 @@ class About extends React.Component {
                     } else {
                         prevState.componentConfigs.map((config) => {
                             componentConfigs.push(config);
-    
+
                             if (config.id === addAfterId) {
                                 componentConfigs.push(newComponentConfig);
                             }

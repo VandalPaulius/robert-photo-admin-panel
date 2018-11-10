@@ -33,7 +33,7 @@ class GeneralSettings extends React.Component {
                 }
             },
             setSaveError: saveError => this.setState({ saveError }),
-            setSaveStatus: saveStatus => this.setState({ saveStatus }), 
+            setSaveStatus: saveStatus => this.setState({ saveStatus }),
         };
     }
 

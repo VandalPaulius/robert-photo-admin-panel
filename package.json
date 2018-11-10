@@ -7,8 +7,7 @@
         "build": "webpack --config webpack.config.js --mode=production",
         "dev": "webpack-dev-server --open --watch --config webpack.dev.config.js --mode=development",
         "lint": "./node_modules/.bin/eslint \"src/**/*.{js,jsx}\"",
-        "format": "./node_modules/.bin/prettier-eslint --write \"src/**/*.js\"",
-        "prepush": "npm-run-all --serial \"format\" \"lint -- --fix\""
+        "format": "./node_modules/.bin/prettier-eslint --write \"src/**/*.js\""
     },
     "dependencies": {
         "autoprefixer": "^9.1.0",

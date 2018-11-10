@@ -114,7 +114,7 @@ class Gallery extends React.Component {
                     }],
                 }];
 
-                this.setState({ loading: true })
+                this.setState({ loading: true });
 
                 setTimeout(() => {
                     this.setState((prevState) => {
