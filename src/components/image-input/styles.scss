@@ -1,0 +1,91 @@
+.imageInput {
+    &>.labelContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        &>.label {
+            height: 15px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        &>.secondaryLabel {
+            color: #acacac;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+    }
+
+    &>.image {
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    // &>.uploadButtonContainer {
+    //     display: flex;
+    //     justify-content: flex-end;
+    //     margin: 0px 5px;
+
+    //     input {
+    //         button {
+    //             cursor: pointer;
+    //             background: #252525;
+    //             color: #FFFFFF;
+    //             font-size: 17px;
+    //             padding: 12px 20px;
+    //             display: flex;
+    //             justify-content: center;
+    //             box-shadow: 0 0 6px rgba(0, 0, 0, 0.356);
+    //             transition: background 0.1s ease-out;
+    //             user-select: none;
+
+    //             &:hover {
+    //                 color: #000000;
+    //                 background-color: #FFFFFF;
+    //                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.356);
+    //                 z-index: 1;
+    //             }
+    //         }
+    //     }
+    // }
+
+    &>.uploadButtonContainer {
+        display: flex;
+        justify-content: flex-end;
+        margin: 0px 5px;
+
+        &>.uploadContainer {
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.356);
+
+            &.hovered {
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.356);
+            }
+
+            .button {
+                z-index: 200;
+            }
+
+            input {
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                margin: 0;
+                padding: 0;
+                font-size: 100px;
+                opacity: 0;
+            }
+        }
+    }
+
+    &>.error {
+        color: rgb(255, 0, 0);
+        height: 15px;
+        margin-top: 8px;
+        font-size: 14px;
+    }
+}

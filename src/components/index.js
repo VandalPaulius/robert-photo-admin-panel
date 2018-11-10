@@ -7,3 +7,4 @@ export { CheckIcon } from './check-icon';
 export { HollowButton } from './hollow-button';
 export { RemoveConfirmationOverlay } from './remove-confirmation-overlay';
 export { ConfigInputField } from './config-input-field';
+export { ImageInput } from './image-input';
