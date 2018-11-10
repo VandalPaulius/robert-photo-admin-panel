@@ -76,7 +76,7 @@ class ConfigInputField extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className={this.props.className}>
                 <div className={styles.configInputField}>
                     {this.renderInput()}
                     {this.renderButtonPanel()}
@@ -94,6 +94,7 @@ class ConfigInputField extends React.Component {
 }
 
 ConfigInputField.propTypes = {
+    className: PropTypes.string,
     onClickRemove: PropTypes.func,
     onClickUp: PropTypes.func,
     onClickDown: PropTypes.func,
@@ -105,6 +106,7 @@ ConfigInputField.propTypes = {
 };
 
 ConfigInputField.defaultProps = {
+    className: '',
     onClickRemove: null,
     onClickUp: null,
     onClickDown: null,

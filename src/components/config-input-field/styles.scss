@@ -5,7 +5,6 @@
 
     &>.inputFieldContainer {
         flex-grow: 2;
-        min-width: 350px;
     }
 
     &>.buttonPanel {
@@ -19,6 +18,21 @@
             display: flex;
             flex-direction: column;
             flex-wrap: wrap;
+        }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .configInputField {
+        display: block;
+    
+        &>.buttonPanel {
+            flex-direction: row;
+            margin-left: 0;
+    
+            &>.upDownContainer {
+                flex-direction: row;
+            }
         }
     }
 }

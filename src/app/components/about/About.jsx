@@ -125,22 +125,6 @@ class About extends React.Component {
                         .filter(config => config.id !== configId),
                 }));
             },
-            // toggleConfirmationOverlay: ({
-            //     onRemove,
-            //     onCancel,
-            //     showOverlay,
-            // }) => {
-            //     if (showOverlay) {
-            //         this.setState({
-            //             confirmationOverlay: {
-            //                 onRemove,
-            //                 onCancel,
-            //             },
-            //         });
-            //     } else {
-            //         this.setState({ confirmationOverlay: null });
-            //     }
-            // },
         };
     }
 
@@ -225,31 +209,8 @@ class About extends React.Component {
     renderInputField(config) {
         return (
             <div key={config.id}>
-                <div className={styles.removeButtonContainer}>
-                    {/* <HollowButton
-                        text="Remove"
-                        onClick={() => {
-                            this.actions.toggleConfirmationOverlay({
-                                showOverlay: true,
-                                onRemove: () => {
-                                    this.actions.removeComponent(config.id);
-                                    this.actions.toggleConfirmationOverlay({ showOverlay: false });
-                                },
-                                onCancel: () => this.actions.toggleConfirmationOverlay({
-                                    showOverlay: false,
-                                }),
-                            });
-                        }}
-                    /> */}
-                </div>
-                {/* <InputField
-                    className={styles.inputField}
-                    label={config.label}
-                    setRef={ref => this.actions.setRef(ref, config.refName)}
-                    defaultValue={config.defaultValue}
-                    secondaryLabel="Optional"
-                /> */}
                 <ConfigInputField
+                    className={styles.inputField}
                     label={config.label}
                     setRef={ref => this.actions.setRef(ref, config.refName)}
                     defaultValue={config.defaultValue}
@@ -293,12 +254,6 @@ class About extends React.Component {
                         </div>
                     </div>
                 </div>
-                {/* {this.state.confirmationOverlay && (
-                    <RemoveConfirmationOverlay
-                        onRemove={this.state.confirmationOverlay.onRemove}
-                        onCancel={this.state.confirmationOverlay.onCancel}
-                    />
-                )} */}
             </div>
         );
     }
