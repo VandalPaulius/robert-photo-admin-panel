@@ -4,7 +4,7 @@ import { LoadingIcon } from 'components';
 import styles from './styles.scss';
 import {
     Sidebar,
-    /* Gallery, */
+    GalleryGeneralSettings,
     About,
     Contact,
     GeneralSettings,
@@ -116,6 +116,26 @@ class App extends React.Component {
                     render={() => (
                         <About
                             description={this.state.config.aboutMe}
+                        />
+                    )}
+                /> */}
+                <Route
+                    path="/gallery-general"
+                    render={() => (
+                        <GalleryGeneralSettings
+                            config={this.state.config.gallery}
+                            // eslint-disable-next-line no-console
+                            onSave={(data) => { console.log('GalleryGeneralSettings onSave: data: ', data); }}
+                        />
+                    )}
+                />
+                {/* <Route
+                    path="/gallery-general"
+                    render={() => (
+                        <Gallery
+                            config={this.state.config.gallery}
+                            // eslint-disable-next-line no-console
+                            onSave={(data) => { console.log('Gallery onSave: data: ', data); }}
                         />
                     )}
                 /> */}
