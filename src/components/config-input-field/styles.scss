@@ -1,0 +1,39 @@
+.configInputField {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+
+    &>.inputFieldContainer {
+        flex-grow: 2;
+    }
+
+    &>.buttonPanel {
+        margin-left: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: space-between;
+
+        &>.upDownContainer {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .configInputField {
+        display: block;
+    
+        &>.buttonPanel {
+            margin-top: 10px;
+            flex-direction: row;
+            margin-left: 0;
+    
+            &>.upDownContainer {
+                flex-direction: row;
+            }
+        }
+    }
+}

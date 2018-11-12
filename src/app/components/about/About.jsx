@@ -2,12 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import uuid from 'uuid/v4';
 import {
-    InputField,
     SendButton,
     HollowButton,
-    RemoveConfirmationOverlay,
+    ConfigInputField,
 } from 'components';
-import { debug } from 'util';
 import styles from './styles.scss';
 
 class About extends React.Component {
@@ -19,7 +17,6 @@ class About extends React.Component {
             saveError: '',
             saveStatus: '',
             componentConfigs: [],
-            confirmationOverlay: null,
         };
 
         this.actions = this.initActions();
@@ -27,7 +24,6 @@ class About extends React.Component {
         this.actions.setSaveError = this.actions.setSaveError.bind(this);
         this.actions.setSaveStatus = this.actions.setSaveStatus.bind(this);
         this.saveButtonHandler = this.saveButtonHandler.bind(this);
-        this.actions.toggleConfirmationOverlay = this.actions.toggleConfirmationOverlay.bind(this);
     }
 
     // eslint-disable-next-line react/sort-comp
@@ -53,21 +49,21 @@ class About extends React.Component {
                     this.setState({ saveStatus });
                 }
             },
-            addComponent: ({ componentType, addAfterId, defaultValue }) => {
+            addComponent: ({ type, addAfterId, defaultValue }) => {
                 this.setState((prevState) => {
                     const componentLabels = {
                         heading: 'Heading',
                         text: 'Text field',
-                        picture: 'Picture URL',
+                        picture: 'Picture',
                     };
 
                     const id = uuid();
 
                     const newComponentConfig = {
                         id,
-                        label: componentLabels[componentType],
-                        refName: `${componentType}-${id}`,
-                        type: componentType,
+                        label: componentLabels[type],
+                        refName: `${type}-${id}`,
+                        type,
                         defaultValue: defaultValue || '',
                     };
 
@@ -99,20 +95,20 @@ class About extends React.Component {
                     if (incomingConfig.image) {
                         component.label = 'Picture URL';
                         component.defaultValue = incomingConfig.url;
-                        component.componentType = 'picture';
+                        component.type = 'picture';
                     } else if (incomingConfig.text) {
                         component.defaultValue = incomingConfig.content;
 
                         if (incomingConfig.heading) {
                             component.label = 'Heading';
-                            component.componentType = 'heading';
+                            component.type = 'heading';
                         } else {
                             component.label = 'Text field';
-                            component.componentType = 'text';
+                            component.type = 'text';
                         }
                     }
 
-                    component.refName = `${component.componentType}-${component.id}`;
+                    component.refName = `${component.type}-${component.id}`;
 
                     return component;
                 });
@@ -125,21 +121,49 @@ class About extends React.Component {
                         .filter(config => config.id !== configId),
                 }));
             },
-            toggleConfirmationOverlay: ({
-                onRemove,
-                onCancel,
-                showOverlay,
-            }) => {
-                if (showOverlay) {
-                    this.setState({
-                        confirmationOverlay: {
-                            onRemove,
-                            onCancel,
-                        },
+            moveComponent: (up, configId) => {
+                this.setState((prevState) => {
+                    let currentComponentIndex;
+                    let currentComponentConfig;
+
+                    prevState.componentConfigs.map((config, index) => {
+                        if (config.id === configId) {
+                            currentComponentIndex = index;
+                            currentComponentConfig = config;
+                        }
                     });
-                } else {
-                    this.setState({ confirmationOverlay: null });
-                }
+
+                    const componentConfigs = [];
+
+                    prevState.componentConfigs.map((config, index) => {
+                        if (up) {
+                            if (
+                                index + 1 === currentComponentIndex
+                                || currentComponentIndex === 0 && index === 0
+                            ) {
+                                componentConfigs.push(currentComponentConfig);
+                            }
+
+                            if (config.id !== configId) {
+                                componentConfigs.push(config);
+                            }
+                        } else {
+                            if (config.id !== configId) {
+                                componentConfigs.push(config);
+                            }
+
+                            if (
+                                index === currentComponentIndex + 1
+                                || currentComponentIndex === prevState.componentConfigs.length - 1
+                                && index === prevState.componentConfigs.length - 1
+                            ) {
+                                componentConfigs.push(currentComponentConfig);
+                            }
+                        }
+                    });
+
+                    return { componentConfigs };
+                });
             },
         };
     }
@@ -162,14 +186,14 @@ class About extends React.Component {
                 const config = {};
                 config.id = configRaw.id;
 
-                if (configRaw.componentType === 'picture') {
+                if (configRaw.type === 'picture') {
                     config.image = true;
                     config.alt = 'About page picture';
                     config.url = getInputValue(configRaw.refName);
-                } else if (configRaw.componentType === 'text') {
+                } else if (configRaw.type === 'text') {
                     config.text = true;
                     config.content = getInputValue(configRaw.refName);
-                } else if (configRaw.componentType === 'heading') {
+                } else if (configRaw.type === 'heading') {
                     config.text = true;
                     config.heading = true;
                     config.content = getInputValue(configRaw.refName);
@@ -200,21 +224,21 @@ class About extends React.Component {
                 <HollowButton
                     text="+  Heading"
                     onClick={() => this.actions.addComponent({
-                        componentType: 'heading',
+                        type: 'heading',
                         addAfterId,
                     })}
                 />
                 <HollowButton
                     text="+  Text box"
                     onClick={() => this.actions.addComponent({
-                        componentType: 'text',
+                        type: 'text',
                         addAfterId,
                     })}
                 />
                 <HollowButton
                     text="+  Picture"
                     onClick={() => this.actions.addComponent({
-                        componentType: 'picture',
+                        type: 'picture',
                         addAfterId,
                     })}
                 />
@@ -225,29 +249,17 @@ class About extends React.Component {
     renderInputField(config) {
         return (
             <div key={config.id}>
-                <div className={styles.removeButtonContainer}>
-                    <HollowButton
-                        text="Remove"
-                        onClick={() => {
-                            this.actions.toggleConfirmationOverlay({
-                                showOverlay: true,
-                                onRemove: () => {
-                                    this.actions.removeComponent(config.id);
-                                    this.actions.toggleConfirmationOverlay({ showOverlay: false });
-                                },
-                                onCancel: () => this.actions.toggleConfirmationOverlay({
-                                    showOverlay: false,
-                                }),
-                            });
-                        }}
-                    />
-                </div>
-                <InputField
+                <ConfigInputField
                     className={styles.inputField}
                     label={config.label}
                     setRef={ref => this.actions.setRef(ref, config.refName)}
                     defaultValue={config.defaultValue}
                     secondaryLabel="Optional"
+                    onClickRemove={() => this.actions.removeComponent(config.id)}
+                    onClickUp={() => this.actions.moveComponent(true, config.id)}
+                    onClickDown={() => this.actions.moveComponent(false, config.id)}
+                    textarea={config.type === 'text' && true}
+                    image={config.type === 'picture' && true}
                 />
                 <div>
                     {this.renderAddButtons(config.id)}
@@ -257,10 +269,11 @@ class About extends React.Component {
     }
 
     render() {
+        console.log('About this.state: ', this.state)
+
         return (
             <div className={styles.contact}>
                 <div className={styles.content}>
-                    {/* {this.renderInputField()} */}
                     <div>
                         {this.renderAddButtons()}
                     </div>
@@ -281,12 +294,6 @@ class About extends React.Component {
                         </div>
                     </div>
                 </div>
-                {this.state.confirmationOverlay && (
-                    <RemoveConfirmationOverlay
-                        onRemove={this.state.confirmationOverlay.onRemove}
-                        onCancel={this.state.confirmationOverlay.onCancel}
-                    />
-                )}
             </div>
         );
     }
