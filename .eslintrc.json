@@ -8,6 +8,13 @@
         "react"
     ],
     "extends": "airbnb",
+    "settings": {
+        "import/resolver": {
+            "webpack": {
+                "config": "webpack.config.js"
+            }
+        }
+    },
     "rules": {
         "indent": ["error", 4, {
             "SwitchCase": 1

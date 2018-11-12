@@ -28,13 +28,11 @@ class ImageInput extends React.Component {
                 reader.onerror = () => this.setState({ error: 'Error while reading a file' });
 
                 reader.onload = () => {
-                    const imageFile = reader.result;
-
-                    // eslint-disable-next-line no-console
-                    console.log('imageFile: ', imageFile);
+                    // const imageFile = reader.result; // actual image base64 URL to be uploaded
 
                     setTimeout(() => {
-                        const imageUrl = imageFile;
+                        // returned from server URL
+                        const imageUrl = 'https://vignette.wikia.nocookie.net/adventuretimewithfinnandjake/images/3/3e/FlamePrincess.png/revision/latest?cb=20160314152748';
 
                         this.setState({
                             uploadStatus: 'success',

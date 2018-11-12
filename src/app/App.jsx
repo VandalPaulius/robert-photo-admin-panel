@@ -101,9 +101,13 @@ class App extends React.Component {
                     render={() => (
                         <Gallery
                             getPrintedButtonName={this.state.config.gallery.getPrintedButtonName}
-                            orderPrintButtonContent={this.state.config.gallery.orderPrintButtonContent}
+                            // eslint-disable-next-line max-len
+                            orderPrintButtonContent={
+                                this.state.config.gallery.orderPrintButtonContent}
                             orderEmailPlaceholder={this.state.config.gallery.orderEmailPlaceholder}
-                            orderMessagePlaceholder={this.state.config.gallery.orderMessagePlaceholder}
+                            // eslint-disable-next-line max-len
+                            orderMessagePlaceholder={
+                                this.state.config.gallery.orderMessagePlaceholder}
                         />
                     )}
                 />
@@ -120,6 +124,7 @@ class App extends React.Component {
                     render={() => (
                         <About
                             config={this.state.config.about}
+                            // eslint-disable-next-line no-console
                             onSave={(data) => { console.log('About onSave: data: ', data); }}
                         />
                     )}
@@ -129,6 +134,7 @@ class App extends React.Component {
                     render={() => (
                         <Contact
                             config={this.state.config.contact}
+                            // eslint-disable-next-line no-console
                             onSave={(data) => { console.log('Contact onSave: data: ', data); }}
                         />
                     )}
@@ -138,6 +144,7 @@ class App extends React.Component {
                     render={() => (
                         <GeneralSettings
                             config={this.state.config.general}
+                            // eslint-disable-next-line no-console
                             onSave={(data) => { console.log('GeneralSettings onSave: data: ', data); }}
                         />
                     )}

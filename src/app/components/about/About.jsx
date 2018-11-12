@@ -165,6 +165,21 @@ class About extends React.Component {
                     return { componentConfigs };
                 });
             },
+            setComponentValue: (value, configId) => {
+                this.setState((prevState) => {
+                    const componentConfigs = prevState.componentConfigs.map((config) => {
+                        const newConfig = { ...config };
+
+                        if (newConfig.id === configId) {
+                            newConfig.value = value;
+                        }
+
+                        return newConfig;
+                    });
+
+                    return { componentConfigs };
+                });
+            },
         };
     }
 
@@ -189,7 +204,7 @@ class About extends React.Component {
                 if (configRaw.type === 'picture') {
                     config.image = true;
                     config.alt = 'About page picture';
-                    config.url = getInputValue(configRaw.refName);
+                    config.url = configRaw.value || configRaw.defaultValue;
                 } else if (configRaw.type === 'text') {
                     config.text = true;
                     config.content = getInputValue(configRaw.refName);
@@ -260,6 +275,9 @@ class About extends React.Component {
                     onClickDown={() => this.actions.moveComponent(false, config.id)}
                     textarea={config.type === 'text' && true}
                     image={config.type === 'picture' && true}
+                    onImageUploaded={(imageUrl) => {
+                        this.actions.setComponentValue(imageUrl, config.id);
+                    }}
                 />
                 <div>
                     {this.renderAddButtons(config.id)}
@@ -269,8 +287,6 @@ class About extends React.Component {
     }
 
     render() {
-        console.log('About this.state: ', this.state)
-
         return (
             <div className={styles.contact}>
                 <div className={styles.content}>

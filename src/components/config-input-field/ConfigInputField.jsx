@@ -65,9 +65,7 @@ class ConfigInputField extends React.Component {
                 <div className={styles.inputFieldContainer}>
                     <ImageInput
                         className={styles.inputField}
-                        onUploaded={(url) => {
-                            console.log('onUploaded url: ', url);
-                        }}
+                        onUploaded={this.props.onImageUploaded}
                         defaultValue={this.props.defaultValue}
                         label={this.props.label}
                         secondaryLabel={this.props.secondaryLabel}
@@ -122,6 +120,7 @@ ConfigInputField.propTypes = {
     secondaryLabel: PropTypes.string,
     textarea: PropTypes.bool,
     image: PropTypes.bool,
+    onImageUploaded: PropTypes.func,
 };
 
 ConfigInputField.defaultProps = {
@@ -135,6 +134,7 @@ ConfigInputField.defaultProps = {
     secondaryLabel: '',
     textarea: false,
     image: false,
+    onImageUploaded: () => {},
 };
 
 export default ConfigInputField;
