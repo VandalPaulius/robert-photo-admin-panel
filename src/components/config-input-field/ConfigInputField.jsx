@@ -4,6 +4,7 @@ import {
     HollowButton,
     RemoveConfirmationOverlay,
     InputField,
+    ImageInput,
 } from 'components';
 import styles from './styles.scss';
 
@@ -59,6 +60,23 @@ class ConfigInputField extends React.Component {
     }
 
     renderInput() {
+        if (this.props.image) {
+            return (
+                <div className={styles.inputFieldContainer}>
+                    <ImageInput
+                        className={styles.inputField}
+                        onUploaded={(url) => {
+                            console.log('onUploaded url: ', url);
+                        }}
+                        defaultValue={this.props.defaultValue}
+                        label={this.props.label}
+                        secondaryLabel={this.props.secondaryLabel}
+                        imageHeight="200px"
+                    />
+                </div>
+            );
+        }
+
         return (
             <div className={styles.inputFieldContainer}>
                 <InputField
@@ -103,6 +121,7 @@ ConfigInputField.propTypes = {
     label: PropTypes.string,
     secondaryLabel: PropTypes.string,
     textarea: PropTypes.bool,
+    image: PropTypes.bool,
 };
 
 ConfigInputField.defaultProps = {
@@ -115,6 +134,7 @@ ConfigInputField.defaultProps = {
     label: '',
     secondaryLabel: '',
     textarea: false,
+    image: false,
 };
 
 export default ConfigInputField;

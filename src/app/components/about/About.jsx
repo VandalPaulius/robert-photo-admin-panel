@@ -54,7 +54,7 @@ class About extends React.Component {
                     const componentLabels = {
                         heading: 'Heading',
                         text: 'Text field',
-                        picture: 'Picture URL',
+                        picture: 'Picture',
                     };
 
                     const id = uuid();
@@ -259,6 +259,7 @@ class About extends React.Component {
                     onClickUp={() => this.actions.moveComponent(true, config.id)}
                     onClickDown={() => this.actions.moveComponent(false, config.id)}
                     textarea={config.type === 'text' && true}
+                    image={config.type === 'picture' && true}
                 />
                 <div>
                     {this.renderAddButtons(config.id)}
