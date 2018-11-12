@@ -20,18 +20,31 @@ class ImageInput extends React.Component {
     // eslint-disable-next-line react/sort-comp
     initActions() {
         return {
-            uploadImage: () => {
+            uploadImage: (event) => {
                 this.setState({ uploadStatus: 'loading' });
 
-                setTimeout(() => {
-                    const imageUrl = 'http://apeconcerts.com/wp-content/uploads/2017/07/BTSM_1024-1024x576.jpg';
+                const reader = new FileReader();
 
-                    this.setState({
-                        uploadStatus: 'success',
-                        imageUrl,
-                    });
-                    this.props.onUploaded(imageUrl);
-                }, 500);
+                reader.onerror = () => this.setState({ error: 'Error while reading a file' });
+
+                reader.onload = () => {
+                    const imageFile = reader.result;
+
+                    // eslint-disable-next-line no-console
+                    console.log('imageFile: ', imageFile);
+
+                    setTimeout(() => {
+                        const imageUrl = imageFile;
+
+                        this.setState({
+                            uploadStatus: 'success',
+                            imageUrl,
+                        });
+                        this.props.onUploaded(imageUrl);
+                    }, 500);
+                };
+
+                reader.readAsDataURL(event.target.files[0]);
             },
             setError: error => this.setState({ error }),
             toggleUploadButtonMouseEnter: uploadButtonMouseEntered => this.setState({
@@ -41,10 +54,7 @@ class ImageInput extends React.Component {
     }
 
     render() {
-        console.log('ImageInput this.props: ', this.props)
-
         const imageUrl = this.props.defaultValue || this.state.imageUrl;
-        console.log('ImageInput imageUrl: ', imageUrl)
 
         return (
             <div className={`${styles.imageInput} ${this.props.className}`}>
@@ -70,17 +80,6 @@ class ImageInput extends React.Component {
                     </React.Fragment>
                 ) : (
                     <React.Fragment>
-                        {/* <div className={styles.uploadButtonContainer}>
-                            <input type="file" />
-                            <SendButton
-                                onClick={this.initActions}
-                                status={this.state.uploadStatus}
-                            >
-                                Upload
-                            </SendButton>
-                        </div> */}
-
-
                         <div className={styles.uploadButtonContainer}>
                             <div
                                 className={`${styles.uploadContainer} ${
@@ -99,11 +98,13 @@ class ImageInput extends React.Component {
                                     status={this.state.uploadStatus}
                                     inverted={this.state.uploadButtonMouseEntered}
                                 >
-                                    Upload
+                                    Choose and upload
                                 </SendButton>
-                                <input type="file" />
+                                <input
+                                    type="file"
+                                    onInput={this.actions.uploadImage}
+                                />
                             </div>
-                            
                         </div>
                         <div className={styles.error}>
                             {this.state.error}

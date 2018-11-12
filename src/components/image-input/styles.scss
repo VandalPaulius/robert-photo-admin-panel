@@ -22,37 +22,8 @@
         background-repeat: no-repeat;
     }
 
-    // &>.uploadButtonContainer {
-    //     display: flex;
-    //     justify-content: flex-end;
-    //     margin: 0px 5px;
-
-    //     input {
-    //         button {
-    //             cursor: pointer;
-    //             background: #252525;
-    //             color: #FFFFFF;
-    //             font-size: 17px;
-    //             padding: 12px 20px;
-    //             display: flex;
-    //             justify-content: center;
-    //             box-shadow: 0 0 6px rgba(0, 0, 0, 0.356);
-    //             transition: background 0.1s ease-out;
-    //             user-select: none;
-
-    //             &:hover {
-    //                 color: #000000;
-    //                 background-color: #FFFFFF;
-    //                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.356);
-    //                 z-index: 1;
-    //             }
-    //         }
-    //     }
-    // }
-
     &>.uploadButtonContainer {
         display: flex;
-        justify-content: flex-end;
         margin: 0px 5px;
 
         &>.uploadContainer {
