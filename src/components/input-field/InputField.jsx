@@ -5,16 +5,16 @@ import styles from './styles.scss';
 function InputField(props) {
     return (
         <div className={`${styles.inputField} ${props.className}`}>
-            <div className={styles.labelContainer}>
-                <div className={styles.label}>
-                    {props.label}
-                </div>
-                {props.secondaryLabel && (
+            {props.secondaryLabel && props.label && (
+                <div className={styles.labelContainer}>
+                    <div className={styles.label}>
+                        {props.label}
+                    </div>
                     <div className={styles.secondaryLabel}>
                         {props.secondaryLabel}
                     </div>
-                )}
-            </div>
+                </div>
+            )}
             {props.textarea ? (
                 <textarea
                     className={styles.input}

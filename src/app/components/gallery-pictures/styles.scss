@@ -1,4 +1,4 @@
-.contact {
+.galleryPictures {
     .content {
         max-width: 700px;
 
@@ -30,6 +30,21 @@
             display: flex;
             justify-content: flex-end;
             margin: 30px 20px 10px;
+        }
+
+        .loader {
+            margin-top: 100px;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+    
+            &>.loadingIcon {
+                height: 80px;
+                width: 80px;
+                stroke-width: 2px;
+            }
         }
     }
 }
