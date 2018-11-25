@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { LoadingIcon } from 'components';
 import styles from './styles.scss';
 import {
+    GalleryPictures,
     Sidebar,
     GalleryGeneralSettings,
     About,
@@ -129,16 +130,13 @@ class App extends React.Component {
                         />
                     )}
                 />
-                {/* <Route
-                    path="/gallery-general"
+                <Route
+                    path="/"
+                    exact
                     render={() => (
-                        <Gallery
-                            config={this.state.config.gallery}
-                            // eslint-disable-next-line no-console
-                            onSave={(data) => { console.log('Gallery onSave: data: ', data); }}
-                        />
+                        <GalleryPictures />
                     )}
-                /> */}
+                />
                 <Route
                     path="/about"
                     render={() => (

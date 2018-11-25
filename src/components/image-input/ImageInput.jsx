@@ -56,16 +56,16 @@ class ImageInput extends React.Component {
 
         return (
             <div className={`${styles.imageInput} ${this.props.className}`}>
-                <div className={styles.labelContainer}>
-                    <div className={styles.label}>
-                        {this.props.label}
-                    </div>
-                    {this.props.secondaryLabel && (
+                {this.props.secondaryLabel && this.props.label && (
+                    <div className={styles.labelContainer}>
+                        <div className={styles.label}>
+                            {this.props.label}
+                        </div>
                         <div className={styles.secondaryLabel}>
                             {this.props.secondaryLabel}
                         </div>
-                    )}
-                </div>
+                    </div>
+                )}
                 {imageUrl ? (
                     <React.Fragment>
                         <div

@@ -5,16 +5,16 @@ import styles from './styles.scss';
 function InputField(props) {
     return (
         <div className={`${styles.inputField} ${props.className}`}>
-            <div className={styles.labelContainer}>
-                <div className={styles.label}>
-                    {props.label}
-                </div>
-                {props.secondaryLabel && (
+            {props.secondaryLabel && props.label && (
+                <div className={styles.labelContainer}>
+                    <div className={styles.label}>
+                        {props.label}
+                    </div>
                     <div className={styles.secondaryLabel}>
                         {props.secondaryLabel}
                     </div>
-                )}
-            </div>
+                </div>
+            )}
             {props.textarea ? (
                 <textarea
                     className={styles.input}
@@ -24,6 +24,7 @@ function InputField(props) {
                         minHeight: props.minTextareaHeight,
                     }}
                     defaultValue={props.defaultValue}
+                    onChange={props.onChange}
                 />
             ) : (
                 <input
@@ -32,6 +33,7 @@ function InputField(props) {
                     ref={props.setRef}
                     type={props.type}
                     defaultValue={props.defaultValue}
+                    onChange={props.onChange}
                 />
             )}
             <div className={styles.error}>
@@ -52,6 +54,7 @@ InputField.propTypes = {
     minTextareaHeight: PropTypes.string,
     defaultValue: PropTypes.string,
     secondaryLabel: PropTypes.string,
+    onChange: PropTypes.func,
 };
 
 InputField.defaultProps = {
@@ -65,6 +68,7 @@ InputField.defaultProps = {
     minTextareaHeight: '40px',
     defaultValue: '',
     secondaryLabel: '',
+    onChange: () => {},
 };
 
 export default InputField;
