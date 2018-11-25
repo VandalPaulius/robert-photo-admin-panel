@@ -232,19 +232,19 @@ class GalleryPictures extends React.Component {
                 });
             },
             setPictureUrl: (url, configId) => {
-                // this.setState((prevState) => {
-                //     const componentConfigs = prevState.componentConfigs.map((config) => {
-                //         const newConfig = { ...config };
+                this.setState((prevState) => {
+                    const componentConfigs = prevState.componentConfigs.map((config) => {
+                        const newConfig = { ...config };
 
-                //         if (newConfig.id === configId) {
-                //             newConfig.value = value;
-                //         }
+                        if (newConfig.id === configId) {
+                            newConfig.url = url;
+                        }
 
-                //         return newConfig;
-                //     });
+                        return newConfig;
+                    });
 
-                //     return { componentConfigs };
-                // });
+                    return { componentConfigs };
+                });
             },
         };
     }
@@ -315,7 +315,7 @@ class GalleryPictures extends React.Component {
                     onClickDown={() => this.actions.moveComponent(false, picture.id)}
                     image
                     onImageUploaded={(imageUrl) => {
-                        this.actions.setComponentValue(imageUrl, picture.id);
+                        this.actions.setPictureUrl(imageUrl, picture.id);
                     }}
                 />
                 <div>
