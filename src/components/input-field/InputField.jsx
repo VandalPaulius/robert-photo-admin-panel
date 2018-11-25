@@ -24,6 +24,7 @@ function InputField(props) {
                         minHeight: props.minTextareaHeight,
                     }}
                     defaultValue={props.defaultValue}
+                    onChange={props.onChange}
                 />
             ) : (
                 <input
@@ -32,6 +33,7 @@ function InputField(props) {
                     ref={props.setRef}
                     type={props.type}
                     defaultValue={props.defaultValue}
+                    onChange={props.onChange}
                 />
             )}
             <div className={styles.error}>
@@ -52,6 +54,7 @@ InputField.propTypes = {
     minTextareaHeight: PropTypes.string,
     defaultValue: PropTypes.string,
     secondaryLabel: PropTypes.string,
+    onChange: PropTypes.func,
 };
 
 InputField.defaultProps = {
@@ -65,6 +68,7 @@ InputField.defaultProps = {
     minTextareaHeight: '40px',
     defaultValue: '',
     secondaryLabel: '',
+    onChange: () => {},
 };
 
 export default InputField;
