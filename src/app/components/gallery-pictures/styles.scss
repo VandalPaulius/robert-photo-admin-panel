@@ -46,5 +46,37 @@
                 stroke-width: 2px;
             }
         }
+
+        .sizeButtonContainer {
+            display: flex;
+            flex-wrap: wrap;
+    
+            &>.sizeToggleButton {
+                margin: 7px;
+                cursor: pointer;
+                font-size: 13px;
+                padding: 10px 15px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                box-shadow: 0 0 6px rgba(0, 0, 0, 0.356);
+                transition: background 0.1s ease-out;
+                user-select: none;
+        
+                &:hover {
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.356);
+                }
+        
+                &>.price {
+                    margin-left: 10px;
+                    font-weight: 600;
+                }
+    
+                &.selected {
+                    background: #252525;
+                    color: #FFFFFF;
+                }
+            }
+        }
     }
 }

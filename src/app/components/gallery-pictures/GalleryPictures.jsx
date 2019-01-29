@@ -44,10 +44,6 @@ class GalleryPictures extends React.Component {
                         name: '16 x 7',
                         price: '£13',
                         id: 'as45as566assadasd45465dasddfg',
-                    }, {
-                        name: '50cm x 71,3cm',
-                        price: '£6953',
-                        id: 'as45as566dasddf456afds5sd641ag',
                     }],
                 }, {
                     id: 'dsfdsfdhfghfgjhfgh4656546fgh',
@@ -246,6 +242,54 @@ class GalleryPictures extends React.Component {
                     return { componentConfigs };
                 });
             },
+            updatePictureSizes: (pictureId, selectedSize) => {
+                this.setState((prevState) => {
+                    const componentConfigs = prevState.componentConfigs.map((config) => {
+                        const newConfig = { ...config };
+
+                        if (newConfig.id === pictureId) {
+                            let existingSizeIndex;
+                            newConfig.sizes.map((existingSize, index) => {
+                                if (existingSize.id === selectedSize.id) {
+                                    existingSizeIndex = index;
+                                }
+                            });
+
+                            if (existingSizeIndex
+                                || typeof existingSizeIndex === 'number' && existingSizeIndex > -1
+                            ) {
+                                newConfig.sizes.splice(existingSizeIndex, 1);
+                            } else {
+                                newConfig.sizes.push(selectedSize);
+                            }
+
+                            newConfig.sizes.sort((aRaw, bRaw) => {
+                                const a = { ...aRaw };
+                                const b = { ...bRaw };
+
+                                if (!a.orderNumber) {
+                                    a.orderNumber = 0;
+                                }
+                                if (!b.orderNumber) {
+                                    b.orderNumber = 0;
+                                }
+                                return a.orderNumber - b.orderNumber;
+                            });
+
+                            newConfig.sizes.map((size) => {
+                                // eslint-disable-next-line no-param-reassign
+                                delete size.orderNumber;
+
+                                return size;
+                            });
+                        }
+
+                        return newConfig;
+                    });
+
+                    return { componentConfigs };
+                });
+            },
         };
     }
 
@@ -304,6 +348,37 @@ class GalleryPictures extends React.Component {
         );
     }
 
+    renderSizeButtons(pictureId, pictureSizes) {
+        return (
+            <React.Fragment>
+                <div className={styles.sizeButtonContainer}>
+                    {this.props.galleryPrices.map(price => (
+                        <div
+                            className={`${
+                                styles.sizeToggleButton
+                            } ${
+                                pictureSizes.find(size => size.id === price.id)
+                                    ? styles.selected
+                                    : ''
+                            }`}
+                            key={price.id}
+                            onClick={() => this.actions.updatePictureSizes(pictureId, price)}
+                            role="button"
+                            tabIndex={0}
+                        >
+                            <div>
+                                {price.name}
+                            </div>
+                            <div className={styles.price}>
+                                {price.price}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </React.Fragment>
+        );
+    }
+
     renderInputField(picture) {
         return (
             <div key={picture.id}>
@@ -317,7 +392,11 @@ class GalleryPictures extends React.Component {
                     onImageUploaded={(imageUrl) => {
                         this.actions.setPictureUrl(imageUrl, picture.id);
                     }}
-                />
+                >
+                    <div>
+                        {this.renderSizeButtons(picture.id, picture.sizes)}
+                    </div>
+                </ConfigInputField>
                 <div>
                     {this.renderAddButtons(picture.id)}
                 </div>
@@ -327,6 +406,7 @@ class GalleryPictures extends React.Component {
 
     render() {
         console.log('GalleryPictures this.state: ', this.state)
+        console.log('GalleryPictures this.props: ', this.props)
         
         return (
             <div className={styles.galleryPictures}>
@@ -367,11 +447,15 @@ class GalleryPictures extends React.Component {
 }
 
 GalleryPictures.propTypes = {
-
+    galleryPrices: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string,
+        price: PropTypes.string,
+        name: PropTypes.string,
+    })),
 };
 
 GalleryPictures.defaultProps = {
-
+    galleryPrices: [],
 };
 
 export default GalleryPictures;

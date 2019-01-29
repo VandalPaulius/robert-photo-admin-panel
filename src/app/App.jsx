@@ -4,6 +4,7 @@ import { LoadingIcon } from 'components';
 import styles from './styles.scss';
 import {
     GalleryPictures,
+    GalleryPrices,
     Sidebar,
     GalleryGeneralSettings,
     About,
@@ -36,7 +37,7 @@ class App extends React.Component {
                                 id: 'asdasd',
                                 image: true,
                                 alt: 'Fabulous Rob',
-                                url: 'https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/26805064_10215337302006544_272682501393385032_n.jpg?_nc_cat=0&oh=787c47aa5cfa28f1b779fb828030c984&oe=5C02BFE3',
+                                url: 'https://pmcvariety.files.wordpress.com/2017/03/spider-man-homecoming.png?w=1000',
                             }, {
                                 id: 'ds4fsd6f4sd',
                                 text: true,
@@ -50,7 +51,7 @@ class App extends React.Component {
                                 id: '56dsf4sd6f465484dsf565',
                                 image: true,
                                 alt: 'More of him',
-                                url: 'https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/17156214_10212262683222996_3831772522503633545_n.jpg?_nc_cat=0&oh=8de33e8b224c176a85f96298bddbc35e&oe=5C00B928',
+                                url: 'https://cdn3.movieweb.com/i/article/8d2c4zexT6kJFnwvfn2Oq7IsH2nOXC/798:50/Spider-Man-Animated-Movie-Why-Different-Liev-Schreiber.jpg',
                             }, {
                                 id: 'sdfsd989223a',
                                 text: true,
@@ -67,6 +68,32 @@ class App extends React.Component {
                                 orderMessagePlaceholder: 'Hi, my address is...',
                                 orderEmailPlaceholder: 'Email',
                             },
+                            galleryPrices: [{
+                                name: '16 x 15',
+                                price: '£25',
+                                id: 'as45as566dasdda798sa7d987fg',
+                                orderNumber: '1',
+                            }, {
+                                name: '16 x 7',
+                                price: '£13',
+                                id: 'as45as566assadasd45465dasddfg',
+                                orderNumber: '2',
+                            }, {
+                                name: 'NEW 16 x 7',
+                                price: '£13',
+                                id: 'as45as566a4sdf6sdf46sssadasd45465dasddfg',
+                                orderNumber: '3',
+                            }, {
+                                name: '69 x 71',
+                                price: '£13',
+                                id: '56dsf46sd4',
+                                orderNumber: '4',
+                            }, {
+                                name: '50cm x 71,3cm',
+                                price: '£6953',
+                                id: 'as45as566dasddf456afds5sd641ag',
+                                orderNumber: '5',
+                            }],
                             general: {
                                 websiteName: 'Robert Photo',
                                 copyrightNote: 'Robert Arthur Photography ©',
@@ -96,30 +123,25 @@ class App extends React.Component {
     renderRoutes() {
         return (
             <React.Fragment>
-                {/* <Route
-                    exact
+                <Route
                     path="/"
+                    exact
                     render={() => (
-                        <Gallery
-                            getPrintedButtonName={this.state.config.gallery.getPrintedButtonName}
-                            // eslint-disable-next-line max-len
-                            orderPrintButtonContent={
-                                this.state.config.gallery.orderPrintButtonContent}
-                            orderEmailPlaceholder={this.state.config.gallery.orderEmailPlaceholder}
-                            // eslint-disable-next-line max-len
-                            orderMessagePlaceholder={
-                                this.state.config.gallery.orderMessagePlaceholder}
+                        <GalleryPictures
+                            galleryPrices={this.state.config.galleryPrices}
                         />
                     )}
                 />
                 <Route
-                    path="/about"
+                    path="/gallery-prices"
                     render={() => (
-                        <About
-                            description={this.state.config.aboutMe}
+                        <GalleryPrices
+                            config={this.state.config.galleryPrices}
+                            // eslint-disable-next-line no-console
+                            onSave={(data) => { console.log('GalleryPrices onSave: data: ', data); }}
                         />
                     )}
-                /> */}
+                />
                 <Route
                     path="/gallery-general"
                     render={() => (
@@ -128,13 +150,6 @@ class App extends React.Component {
                             // eslint-disable-next-line no-console
                             onSave={(data) => { console.log('GalleryGeneralSettings onSave: data: ', data); }}
                         />
-                    )}
-                />
-                <Route
-                    path="/"
-                    exact
-                    render={() => (
-                        <GalleryPictures />
                     )}
                 />
                 <Route

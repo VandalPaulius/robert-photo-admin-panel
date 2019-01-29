@@ -132,6 +132,7 @@ class Sidebar extends React.Component {
                         {this.renderBackButton()}
                         <div className={styles.mainContent}>
                             {this.renderLink('/', 'Gallery Pictures')}
+                            {this.renderLink('/gallery-prices', 'Gallery Prices')}
                             {this.renderLink('/gallery-general', 'Gallery General')}
                             {this.renderLink('/about', 'About')}
                             {this.renderLink('/contact', 'Contact')}

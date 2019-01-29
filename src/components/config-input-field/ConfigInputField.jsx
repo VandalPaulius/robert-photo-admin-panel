@@ -95,6 +95,7 @@ class ConfigInputField extends React.Component {
             <div className={this.props.className}>
                 <div className={styles.configInputField}>
                     {this.renderInput()}
+                    {this.props.children}
                     {this.renderButtonPanel()}
                 </div>
 
@@ -121,6 +122,7 @@ ConfigInputField.propTypes = {
     textarea: PropTypes.bool,
     image: PropTypes.bool,
     onImageUploaded: PropTypes.func,
+    children: PropTypes.node,
 };
 
 ConfigInputField.defaultProps = {
@@ -135,6 +137,7 @@ ConfigInputField.defaultProps = {
     textarea: false,
     image: false,
     onImageUploaded: () => {},
+    children: null,
 };
 
 export default ConfigInputField;
