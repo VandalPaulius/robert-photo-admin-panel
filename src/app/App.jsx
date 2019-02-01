@@ -72,27 +72,27 @@ class App extends React.Component {
                                 name: '16 x 15',
                                 price: '£25',
                                 id: 'as45as566dasdda798sa7d987fg',
-                                orderNumber: '1',
+                                orderNumber: 1,
                             }, {
                                 name: '16 x 7',
                                 price: '£13',
                                 id: 'as45as566assadasd45465dasddfg',
-                                orderNumber: '2',
+                                orderNumber: 2,
                             }, {
                                 name: 'NEW 16 x 7',
                                 price: '£13',
                                 id: 'as45as566a4sdf6sdf46sssadasd45465dasddfg',
-                                orderNumber: '3',
+                                orderNumber: 3,
                             }, {
                                 name: '69 x 71',
                                 price: '£13',
                                 id: '56dsf46sd4',
-                                orderNumber: '4',
+                                orderNumber: 4,
                             }, {
                                 name: '50cm x 71,3cm',
                                 price: '£6953',
                                 id: 'as45as566dasddf456afds5sd641ag',
-                                orderNumber: '5',
+                                orderNumber: 5,
                             }],
                             general: {
                                 websiteName: 'Robert Photo',

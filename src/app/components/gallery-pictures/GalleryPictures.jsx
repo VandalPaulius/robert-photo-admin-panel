@@ -427,7 +427,10 @@ class GalleryPictures extends React.Component {
                             )}
                             <div className={styles.buttonContainer}>
                                 <SendButton
-                                    onClick={this.saveButtonHandler}
+                                    // onClick={this.saveButtonHandler}
+                                    onClick={() => {
+                                        console.log('Send Button onClick');
+                                    }}
                                     status={this.state.saveStatus}
                                 >
                                     Save
@@ -451,6 +454,7 @@ GalleryPictures.propTypes = {
         id: PropTypes.string,
         price: PropTypes.string,
         name: PropTypes.string,
+        orderNumber: PropTypes.number,
     })),
 };
 
