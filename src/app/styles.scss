@@ -40,9 +40,36 @@ html {
             display: flex;
             position: relative;
 
-            .routes {
+            .routes-container {
                 flex-grow: 1;
-                overflow: auto;
+                position: relative;
+                display: flex;
+
+                .routes {
+                    flex-grow: 1;
+                    overflow: auto;
+
+                    &.paddedBottom {
+                        margin-bottom: 80px;
+                    }
+                }
+
+                .saveButtonLayoutContainer {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.356);
+                    background: #c0c0c0;
+
+                    .saveButtonContainer {
+                        height: 80px;
+                        padding: 0 20px;
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+                    }
+                }
             }
 
             &.sidebarCollapsed {
@@ -55,10 +82,8 @@ html {
                     z-index: 2;
                 }
 
-                .routes {
+                .routes-container {
                     margin-left: 38px;
-                    // flex-grow: 1;
-                    // overflow: auto;
                 }
             }
         }

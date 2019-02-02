@@ -159,7 +159,7 @@ class GalleryPrices extends React.Component {
         }
     }
 
-    saveHandler() {
+    saveHandler({ onSuccess, onError }) {
         console.log('onSave');
     }
 

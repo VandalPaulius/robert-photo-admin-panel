@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { LoadingIcon } from 'components';
+import { LoadingIcon, SendButton, Expandable } from 'components';
 import styles from './styles.scss';
 import {
     GalleryPictures,
@@ -21,7 +21,8 @@ class App extends React.Component {
             loaded: false,
             headerOffset: null,
             showSaveButton: false,
-            onClickSave: () => {},
+            onClickSave: ({}) => {},
+            saveStatus: '',
         };
 
         this.actions = this.initActions();
@@ -115,6 +116,11 @@ class App extends React.Component {
             toggleSidebarCollapsible: (sidebarCollapsible) => {
                 this.setState({ sidebarCollapsible });
             },
+            setSaveStatus: (saveStatus) => {
+                if (this.state.saveStatus !== saveStatus) {
+                    this.setState({ saveStatus });
+                }
+            },
             toggleSaveButton: (showSaveButton, onClickSave = () => {}) => this.setState({
                 showSaveButton,
                 onClickSave,
@@ -144,11 +150,7 @@ class App extends React.Component {
                         <GalleryPrices
                             config={this.state.config.galleryPrices}
                             // eslint-disable-next-line no-console
-                            onSave={(data) => {
-                                console.log('GalleryPrices onSave: data: ', data);
-                                // on success
-                                this.actions.toggleSaveButton(false);
-                            }}
+                            onSave={(data) => { console.log('GalleryPrices onSave: data: ', data); }}
                             changeNoted={this.state.showSaveButton}
                             onChange={onClickSave => this.actions.toggleSaveButton(true, onClickSave)}
                         />
@@ -198,14 +200,37 @@ class App extends React.Component {
         );
     }
 
+    saveButtonHandler() {
+        this.state.onClickSave({
+            onSuccess: () => {
+                this.actions.setSaveStatus('success');
+                setTimeout(() => {
+                    this.actions.toggleSaveButton(false);
+                    this.actions.setSaveStatus('idle');
+                }, 1000);
+            },
+            onError: () => this.actions.setSaveStatus('idle'),
+        });
+    }
+
     renderSaveButton() {
-        if (this.state.showSaveButton) {
-            return (
-                <div>
-                    <button onClick={this.state.onClickSave}>SAVE</button>
+        return (
+            <Expandable
+                expanded={this.state.showSaveButton}
+            >
+                <div className={styles.saveButtonContainer}>
+                    <SendButton
+                        onClick={() => {
+                            this.saveButtonHandler();
+                            this.actions.setSaveStatus('loading');
+                        }}
+                        status={this.state.saveStatus}
+                    >
+                        Save
+                    </SendButton>
                 </div>
-            );
-        }
+            </Expandable>
+        );
     }
 
     render() {
@@ -233,11 +258,19 @@ class App extends React.Component {
                                             }}
                                         />
                                     </div>
-                                    <div className={styles.routes}>
-                                        {this.renderRoutes()}
-                                        
+                                    <div className={styles.routesContainer}>
+                                        <div
+                                            className={`${styles.routes} ${
+                                                this.state.showSaveButton ? styles.paddedBottom : ''
+                                            }`}
+                                        >
+                                            {this.renderRoutes()}
+                                        </div>
+                                        <div className={styles.saveButtonLayoutContainer}>
+                                            {this.renderSaveButton()}
+                                        </div>
                                     </div>
-                                    {this.renderSaveButton()}
+                                    
                                 </div>
                             </div>
                         </React.Fragment>
