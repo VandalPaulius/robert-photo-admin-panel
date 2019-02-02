@@ -25,6 +25,7 @@ function InputField(props) {
                     }}
                     defaultValue={props.defaultValue}
                     onChange={props.onChange}
+                    onBlur={props.onBlur}
                 />
             ) : (
                 <input
@@ -34,6 +35,7 @@ function InputField(props) {
                     type={props.type}
                     defaultValue={props.defaultValue}
                     onChange={props.onChange}
+                    onBlur={props.onBlur}
                 />
             )}
             <div className={styles.error}>
@@ -55,6 +57,7 @@ InputField.propTypes = {
     defaultValue: PropTypes.string,
     secondaryLabel: PropTypes.string,
     onChange: PropTypes.func,
+    onBlur: PropTypes.func,
 };
 
 InputField.defaultProps = {
@@ -69,6 +72,7 @@ InputField.defaultProps = {
     defaultValue: '',
     secondaryLabel: '',
     onChange: () => {},
+    onBlur: () => {},
 };
 
 export default InputField;

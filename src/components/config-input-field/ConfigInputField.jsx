@@ -85,6 +85,7 @@ class ConfigInputField extends React.Component {
                     secondaryLabel={this.props.secondaryLabel}
                     textarea={this.props.textarea}
                     minTextareaHeight="140px"
+                    onChange={this.props.onTextInputChange}
                 />
             </div>
         );
@@ -123,6 +124,7 @@ ConfigInputField.propTypes = {
     image: PropTypes.bool,
     onImageUploaded: PropTypes.func,
     children: PropTypes.node,
+    onTextInputChange: PropTypes.func,
 };
 
 ConfigInputField.defaultProps = {
@@ -138,6 +140,7 @@ ConfigInputField.defaultProps = {
     image: false,
     onImageUploaded: () => {},
     children: null,
+    onTextInputChange: () => {},
 };
 
 export default ConfigInputField;

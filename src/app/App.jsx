@@ -20,6 +20,8 @@ class App extends React.Component {
             config: {},
             loaded: false,
             headerOffset: null,
+            showSaveButton: false,
+            onClickSave: () => {},
         };
 
         this.actions = this.initActions();
@@ -113,6 +115,10 @@ class App extends React.Component {
             toggleSidebarCollapsible: (sidebarCollapsible) => {
                 this.setState({ sidebarCollapsible });
             },
+            toggleSaveButton: (showSaveButton, onClickSave = () => {}) => this.setState({
+                showSaveButton,
+                onClickSave,
+            }),
         };
     }
 
@@ -138,7 +144,13 @@ class App extends React.Component {
                         <GalleryPrices
                             config={this.state.config.galleryPrices}
                             // eslint-disable-next-line no-console
-                            onSave={(data) => { console.log('GalleryPrices onSave: data: ', data); }}
+                            onSave={(data) => {
+                                console.log('GalleryPrices onSave: data: ', data);
+                                // on success
+                                this.actions.toggleSaveButton(false);
+                            }}
+                            changeNoted={this.state.showSaveButton}
+                            onChange={onClickSave => this.actions.toggleSaveButton(true, onClickSave)}
                         />
                     )}
                 />
@@ -186,6 +198,16 @@ class App extends React.Component {
         );
     }
 
+    renderSaveButton() {
+        if (this.state.showSaveButton) {
+            return (
+                <div>
+                    <button onClick={this.state.onClickSave}>SAVE</button>
+                </div>
+            );
+        }
+    }
+
     render() {
         return (
             <Router>
@@ -213,7 +235,9 @@ class App extends React.Component {
                                     </div>
                                     <div className={styles.routes}>
                                         {this.renderRoutes()}
+                                        
                                     </div>
+                                    {this.renderSaveButton()}
                                 </div>
                             </div>
                         </React.Fragment>

@@ -17,6 +17,9 @@ class GalleryPrices extends React.Component {
             refs: {},
         };
 
+        this.changeHandler = this.changeHandler.bind(this);
+        this.saveHandler = this.saveHandler.bind(this);
+
         this.actions = this.initActions();
     }
 
@@ -98,7 +101,7 @@ class GalleryPrices extends React.Component {
                     return {
                         updatedConfig: config.filter(component => component.id !== id),
                     };
-                });
+                }, this.changeHandler);
             },
             removeRefs: (id) => {
                 this.setState((prevState) => {
@@ -115,7 +118,7 @@ class GalleryPrices extends React.Component {
                     }
 
                     return { refs };
-                });
+                }, this.changeHandler);
             },
             addSize: (addAfterId) => {
                 const newSize = {
@@ -144,9 +147,20 @@ class GalleryPrices extends React.Component {
                     return {
                         updatedConfig: config,
                     };
-                });
+                }, this.changeHandler);
             },
         };
+    }
+
+    changeHandler() {
+        console.log('changeHandler: this.props.changeNoted', this.props.changeNoted)
+        if (!this.props.changeNoted) {
+            this.props.onChange(this.saveHandler);
+        }
+    }
+
+    saveHandler() {
+        console.log('onSave');
     }
 
     renderAddButton(addAfterId) {
@@ -181,12 +195,14 @@ class GalleryPrices extends React.Component {
                             defaultValue={size.name}
                             className={styles.inputFieldContainer}
                             secondaryLabel="Required"
+                            onTextInputChange={this.changeHandler}
                         >
                             <InputField
                                 label="Price"
                                 setRef={ref => this.actions.setRef(ref, `${size.id}-price`)}
                                 defaultValue={size.price}
                                 secondaryLabel="Required"
+                                onChange={this.changeHandler}
                             />
                         </ConfigInputField>
                         {this.renderAddButton(size.id)}
@@ -215,10 +231,13 @@ GalleryPrices.propTypes = {
         name: PropTypes.string,
         orderNumber: PropTypes.number,
     })),
+    onChange: PropTypes.func.isRequired,
+    changeNoted: PropTypes.bool,
 };
 
 GalleryPrices.defaultProps = {
     config: [],
+    changeNoted: false,
 };
 
 export default GalleryPrices;
