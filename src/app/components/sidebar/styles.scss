@@ -72,13 +72,19 @@
                 justify-content: center;
                 align-items: center;
                 transition: background 0.1s ease-out;
-        
-                &:hover {
-                    color: #000000;
-                    background-color: #FFFFFF;
-                    box-shadow: 0 0 6px rgba(0, 0, 0, 0.356);
-                    z-index: 1;
+                cursor: default;
+
+                &.hoverEnabled {
+                    cursor: pointer;
+
+                    &:hover {
+                        color: #000000;
+                        background-color: #FFFFFF;
+                        box-shadow: 0 0 6px rgba(0, 0, 0, 0.356);
+                        z-index: 1;
+                    }
                 }
+    
         
                 &.active {
                     color: #000000;

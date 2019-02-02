@@ -71,18 +71,22 @@ class Sidebar extends React.Component {
                 to={path}
                 tabIndex={0}
                 role="button"
-                onClick={() => {
+                onClick={(e) => {
+                    if (!this.state.open) {
+                        e.preventDefault();
+                    }
+
                     if (this.state.openCloseEnabled) {
                         this.actions.toggleMenuOpen(false);
                     }
                 }}
-                className={
-                    `${
-                        styles.item
-                    } ${
-                        this.props.location.pathname === path ? styles.active : ''
-                    }`
-                }
+                className={`${
+                    styles.item
+                } ${
+                    this.state.open ? styles.hoverEnabled : ''
+                } ${
+                    this.props.location.pathname === path ? styles.active : ''
+                }`}
             >
                 {name}
             </Link>
