@@ -90,7 +90,7 @@ class GalleryPrices extends React.Component {
                     return {
                         updatedConfig: newConfig,
                     };
-                });
+                }, this.changeHandler);
             },
             removeComponent: (id) => {
                 this.setState((prevState) => {
@@ -153,7 +153,6 @@ class GalleryPrices extends React.Component {
     }
 
     changeHandler() {
-        console.log('changeHandler: this.props.changeNoted', this.props.changeNoted)
         if (!this.props.changeNoted) {
             this.props.onChange(this.saveHandler);
         }
@@ -161,6 +160,24 @@ class GalleryPrices extends React.Component {
 
     saveHandler({ onSuccess, onError }) {
         console.log('onSave');
+
+        const config = this.state.updatedConfig.length
+            ? this.state.updatedConfig
+            : this.props.config;
+
+        const data = config.map((c, index) => {
+            const nameRef = this.state.refs[`${c.id}-name`].value;
+            console.log('nameRef: ', nameRef.value)
+
+            return {
+                orderNumber: index,
+                name: this.state.refs[`${c.id}-name`].value,
+                price: this.state.refs[`${c.id}-price`].value,
+                id: c.id,
+            };
+        });
+
+        
     }
 
     renderAddButton(addAfterId) {

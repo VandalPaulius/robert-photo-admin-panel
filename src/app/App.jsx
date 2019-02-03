@@ -21,7 +21,7 @@ class App extends React.Component {
             loaded: false,
             headerOffset: null,
             showSaveButton: false,
-            onClickSave: ({}) => {},
+            onClickSave: (params) => {}, // eslint-disable-line no-unused-vars
             saveStatus: '',
         };
 
